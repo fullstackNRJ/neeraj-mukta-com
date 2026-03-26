@@ -52,9 +52,8 @@
 
         <p class="gate-legal">
             This site uses ambient sound effects for an immersive experience.
-            Your preference is stored via <code>sessionStorage</code> and
-            cleared when you close the tab. No tracking cookies or third-party
-            services.
+            Your preference is stored via <code>sessionStorage</code> and cleared
+            when you close the tab. No tracking cookies or third-party services.
         </p>
     </div>
 </dialog>
@@ -71,9 +70,15 @@
     const cards = Array.from(document.querySelectorAll(".card"));
     const halos = Array.from(document.querySelectorAll(".halo"));
     const themeToggle = document.querySelector("#themeToggle");
-    const gate = document.querySelector("#welcome-gate") as HTMLDialogElement | null;
-    const gateInput = document.querySelector("#gate-input") as HTMLInputElement | null;
-    const gateError = document.querySelector("#gate-error") as HTMLElement | null;
+    const gate = document.querySelector(
+        "#welcome-gate",
+    ) as HTMLDialogElement | null;
+    const gateInput = document.querySelector(
+        "#gate-input",
+    ) as HTMLInputElement | null;
+    const gateError = document.querySelector(
+        "#gate-error",
+    ) as HTMLElement | null;
     const gateN1 = document.querySelector("#gate-n1");
     const gateN2 = document.querySelector("#gate-n2");
     const gateEnableBtn = document.querySelector("#gate-enable");
@@ -231,7 +236,11 @@
     }
 
     // ── Typewriter ────────────────────────────────────────────────────────
-    function buildHeadlineDOM(typed: string, accentStart: number, accentEnd: number) {
+    function buildHeadlineDOM(
+        typed: string,
+        accentStart: number,
+        accentEnd: number,
+    ) {
         if (!typeNode) {
             return;
         }
@@ -241,7 +250,10 @@
         const seg1 = typed.slice(0, accentStart);
         const seg2 =
             typed.length > accentStart
-                ? typed.slice(accentStart, Math.min(typed.length, accentEnd + 1))
+                ? typed.slice(
+                      accentStart,
+                      Math.min(typed.length, accentEnd + 1),
+                  )
                 : "";
         const seg3 =
             typed.length > accentEnd + 1 ? typed.slice(accentEnd + 1) : "";
