@@ -1,0 +1,39 @@
+---
+import RecruiterContent from "../components/recruiter/RecruiterContent.astro";
+import RecruiterEnhancements from "../components/recruiter/RecruiterEnhancements.astro";
+import RecruiterNavbar from "../components/recruiter/RecruiterNavbar.astro";
+import BackgroundEffects from "../components/layout/BackgroundEffects.astro";
+import Footer from "../components/layout/Footer.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const seo = {
+    title: "Recruiter Mode | Neeraj Mukta",
+    description:
+        "Recruiter-focused profile highlighting product mindset, engineering execution, and measurable business outcomes.",
+    keywords: [
+        "recruiter mode",
+        "principal engineer",
+        "product engineering",
+        "portfolio",
+        "work history",
+        "impact metrics",
+    ],
+    type: "article" as const,
+    canonical: "https://neeraj-mukta.com/recruiter",
+    jsonLd: {
+        "@context": "https://schema.org",
+        "@type": "ProfilePage",
+        name: "Recruiter Mode",
+        description:
+            "Experience-led engineering profile for recruiter review with role history and impact highlights.",
+    },
+};
+---
+
+<BaseLayout {...seo}>
+    <BackgroundEffects />
+    <RecruiterNavbar />
+    <RecruiterContent />
+    <Footer />
+    <RecruiterEnhancements />
+</BaseLayout>
