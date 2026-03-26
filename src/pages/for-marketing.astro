@@ -1,0 +1,45 @@
+---
+import MarketingContent from "../components/marketing/MarketingContent.astro";
+import MarketingEnhancements from "../components/marketing/MarketingEnhancements.astro";
+import MarketingNavbar from "../components/marketing/MarketingNavbar.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const seo = {
+    title: "Growth Engineering | Neeraj Mukta",
+    description:
+        "Technical marketing execution for teams that care about rankings, conversion velocity, and measurable growth outcomes.",
+    keywords: [
+        "growth engineering",
+        "technical SEO",
+        "core web vitals",
+        "conversion rate optimization",
+        "marketing technology",
+    ],
+    type: "article" as const,
+    canonical: "https://neeraj-mukta.com/for-marketing",
+    jsonLd: {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        name: "Growth Engineering",
+        description:
+            "Technical marketing services spanning Core Web Vitals optimization, technical SEO architecture, analytics instrumentation, and CRO-ready interfaces.",
+        provider: {
+            "@type": "Person",
+            name: "Neeraj Mukta",
+        },
+        areaServed: "Global",
+    },
+};
+---
+
+<BaseLayout {...seo}>
+    <Fragment slot="head">
+        <link
+            href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap"
+            rel="stylesheet"
+        />
+    </Fragment>
+    <MarketingNavbar />
+    <MarketingContent />
+    <MarketingEnhancements />
+</BaseLayout>

@@ -1,0 +1,250 @@
+---
+import "../../styles/pages/marketing.css";
+---
+
+<main class="growth-page" id="projects">
+    <section class="growth-shell growth-hero" id="about">
+        <h1 class="growth-headline" data-growth-reveal style="--stagger: 0;">
+            <span>Websites That Rank.</span>
+            <span class="muted">Technology That Converts.</span>
+        </h1>
+
+        <div class="growth-metrics-row">
+            <article
+                class="score-card"
+                data-growth-reveal
+                style="--stagger: 1;"
+            >
+                <p class="score-label">Lighthouse Score</p>
+                <p class="score-value" data-counter="100">0</p>
+                <div class="score-divider" aria-hidden="true"></div>
+                <p class="score-note">
+                    Perfect performance across all mobile metrics.
+                </p>
+            </article>
+
+            <article
+                class="vitals-card"
+                data-growth-reveal
+                style="--stagger: 2;"
+            >
+                <div class="vitals-header">
+                    <h2>Core Web Vitals</h2>
+                    <span class="live-chip">Live Monitoring</span>
+                </div>
+
+                <div class="vitals-grid">
+                    <div class="vital-item">
+                        <span class="vital-kpi"
+                            >LCP (Largest Contentful Paint)</span
+                        >
+                        <div class="vital-metric">
+                            <strong data-counter="0.8" data-suffix="s"
+                                >0.0s</strong
+                            > Excellent
+                        </div>
+                        <div class="meter">
+                            <span style="--meter: 100%;"></span>
+                        </div>
+                    </div>
+                    <div class="vital-item">
+                        <span class="vital-kpi">FID (First Input Delay)</span>
+                        <div class="vital-metric">
+                            <strong data-counter="12" data-suffix="ms"
+                                >0ms</strong
+                            > Excellent
+                        </div>
+                        <div class="meter">
+                            <span style="--meter: 95%;"></span>
+                        </div>
+                    </div>
+                    <div class="vital-item">
+                        <span class="vital-kpi"
+                            >CLS (Cumulative Layout Shift)</span
+                        >
+                        <div class="vital-metric">
+                            <strong data-counter="0.001" data-suffix=""
+                                >0.000</strong
+                            > Excellent
+                        </div>
+                        <div class="meter">
+                            <span style="--meter: 92%;"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-panel" aria-hidden="true">
+                    <span style="--h: 22%;"></span>
+                    <span style="--h: 38%;"></span>
+                    <span style="--h: 55%;"></span>
+                    <span style="--h: 34%;"></span>
+                    <span style="--h: 74%;"></span>
+                    <span style="--h: 48%;"></span>
+                    <span style="--h: 80%;"></span>
+                    <span style="--h: 66%;"></span>
+                    <span style="--h: 88%;"></span>
+                    <span style="--h: 76%;"></span>
+                    <span style="--h: 95%;"></span>
+                    <span style="--h: 84%;"></span>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <section class="growth-shell" id="seo">
+        <div class="section-head" data-growth-reveal style="--stagger: 0;">
+            <h2>Growth Pillars</h2>
+            <p>
+                The four foundational elements behind high-performance digital
+                growth.
+            </p>
+        </div>
+
+        <div class="pillars-grid">
+            <article
+                class="growth-pillar"
+                data-growth-reveal
+                style="--stagger: 1;"
+            >
+                <span class="pillar-index">Pillar 01</span>
+                <h3>Core Web Vitals Mastery</h3>
+                <p>
+                    Optimization beyond generic speed checks. Engineered for
+                    ranking signals and user trust at scale.
+                </p>
+            </article>
+            <article
+                class="growth-pillar"
+                data-growth-reveal
+                style="--stagger: 2;"
+            >
+                <span class="pillar-index">Pillar 02</span>
+                <h3>Conversion-Driven UI</h3>
+                <p>
+                    Minimal interfaces paired with strategic conversion
+                    architecture that turns passive sessions into active leads.
+                </p>
+            </article>
+            <article
+                class="growth-pillar"
+                data-growth-reveal
+                style="--stagger: 3;"
+            >
+                <span class="pillar-index">Pillar 03</span>
+                <h3>Technical SEO Architecture</h3>
+                <p>
+                    Structured schema, semantic markup, and crawl-efficient
+                    rendering so search systems index what matters first.
+                </p>
+            </article>
+            <article
+                class="growth-pillar"
+                data-growth-reveal
+                style="--stagger: 4;"
+            >
+                <span class="pillar-index">Pillar 04</span>
+                <h3>Analytics and Tracking</h3>
+                <p>
+                    Server-side instrumentation and event fidelity that keep
+                    every optimization decision grounded in real data.
+                </p>
+            </article>
+        </div>
+    </section>
+
+    <section
+        class="growth-shell audit-block"
+        id="analytics"
+        data-growth-reveal
+        style="--stagger: 0;"
+    >
+        <h2>Audit-First Methodology</h2>
+        <p>
+            We do not guess. Every engagement begins with a technical growth
+            audit to identify hidden constraints before rollout.
+        </p>
+
+        <div
+            class="terminal-card"
+            role="img"
+            aria-label="Technical audit output"
+        >
+            <div class="terminal-head">
+                <span></span><span></span><span></span>
+                <p>terminal - audit_engine_v2.0</p>
+            </div>
+            <pre>
+$ growth audit --domain "growth-editorial.io"
+Analyzing DOM depth... [OPTIMAL]
+Checking LCP candidate... [0.8s]
+Scanning for cumulative layout shift... [PASSED]
+Validating Schema.org integration... [COMPLETE]
+            </pre>
+        </div>
+
+        <div class="audit-items">
+            <article>
+                <h3>Crawl Efficiency</h3>
+                <p>
+                    Maximize crawl budget through clean hierarchy and
+                    deterministic rendering.
+                </p>
+            </article>
+            <article>
+                <h3>TBT Optimization</h3>
+                <p>
+                    Eliminate main-thread blocks for instant interactivity and
+                    stronger retention.
+                </p>
+            </article>
+            <article>
+                <h3>Index Status</h3>
+                <p>
+                    Real-time visibility checks to preserve rankings through
+                    ongoing iteration.
+                </p>
+            </article>
+        </div>
+    </section>
+
+    <section
+        class="growth-shell cta-block"
+        id="contact"
+        data-growth-reveal
+        style="--stagger: 0;"
+    >
+        <h2>Ready for a deeper analysis?</h2>
+        <p>
+            Get a comprehensive technical SEO breakdown of your platform, with
+            practical fixes and implementation priorities.
+        </p>
+        <div class="cta-actions">
+            <a href="#" class="cta-primary interactive" data-sound="bright"
+                >Get a Free Technical SEO Audit</a
+            >
+            <a
+                href="#projects"
+                class="cta-secondary interactive"
+                data-sound="soft">View Portfolio</a
+            >
+        </div>
+    </section>
+
+    <footer class="growth-footer">
+        <p>© 2026 Growth Editorial. Built for performance.</p>
+        <div class="growth-footer-links">
+            <a href="#" class="interactive" data-sound="soft">LinkedIn</a>
+            <a href="#" class="interactive" data-sound="soft">GitHub</a>
+            <a href="#" class="interactive" data-sound="soft">ReadCV</a>
+        </div>
+        <button
+            id="growthThemeToggle"
+            class="growth-mode-toggle interactive"
+            data-sound="bright"
+            aria-label="Toggle dark and light mode"
+        >
+            <span class="toggle-dot"></span>
+            <span class="toggle-label">Dark Mode</span>
+        </button>
+    </footer>
+</main>
