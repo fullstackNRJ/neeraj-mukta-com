@@ -1,0 +1,417 @@
+<dialog
+    id="welcome-gate"
+    aria-modal="true"
+    aria-labelledby="gate-title"
+    aria-describedby="gate-lead"
+>
+    <div class="gate-inner">
+        <div class="gate-header">
+            <span class="gate-badge">System Check</span>
+            <h2 class="gate-title" id="gate-title">Hello, Human.</h2>
+            <p class="gate-lead" id="gate-lead">
+                Before you enter — a quick verification to unlock the full
+                ambient experience.
+            </p>
+        </div>
+
+        <div class="gate-challenge">
+            <label for="gate-input" class="gate-label">
+                What is <strong id="gate-n1">?</strong> +
+                <strong id="gate-n2">?</strong>?
+            </label>
+            <input
+                id="gate-input"
+                type="number"
+                inputmode="numeric"
+                class="gate-input"
+                placeholder="Enter your answer"
+                autocomplete="off"
+            />
+            <p id="gate-error" class="gate-error" aria-live="polite" hidden>
+                Not quite — try again.
+            </p>
+        </div>
+
+        <div class="gate-actions">
+            <button
+                id="gate-enable"
+                class="btn btn-primary gate-btn interactive"
+                data-sound="bright"
+                type="button"
+            >
+                Enable Sound &amp; Continue
+            </button>
+            <button
+                id="gate-skip"
+                class="btn btn-secondary gate-skip"
+                type="button"
+            >
+                Continue without Sound
+            </button>
+        </div>
+
+        <p class="gate-legal">
+            This site uses ambient sound effects for an immersive experience.
+            Your preference is stored via <code>sessionStorage</code> and
+            cleared when you close the tab. No tracking cookies or third-party
+            services.
+        </p>
+    </div>
+</dialog>
+
+<script>
+    // ── Selectors ─────────────────────────────────────────────────────────
+    const typeNode = document.querySelector("#typewriter");
+    const bentoSubtitleWords = Array.from(
+        document.querySelectorAll(".bento-subtitle .subtitle-word"),
+    );
+    const pathwaysSubtitleWords = Array.from(
+        document.querySelectorAll(".pathways-subtitle .subtitle-word"),
+    );
+    const cards = Array.from(document.querySelectorAll(".card"));
+    const halos = Array.from(document.querySelectorAll(".halo"));
+    const themeToggle = document.querySelector("#themeToggle");
+    const gate = document.querySelector("#welcome-gate") as HTMLDialogElement | null;
+    const gateInput = document.querySelector("#gate-input") as HTMLInputElement | null;
+    const gateError = document.querySelector("#gate-error") as HTMLElement | null;
+    const gateN1 = document.querySelector("#gate-n1");
+    const gateN2 = document.querySelector("#gate-n2");
+    const gateEnableBtn = document.querySelector("#gate-enable");
+    const gateSkipBtn = document.querySelector("#gate-skip");
+
+    // ── Audio ─────────────────────────────────────────────────────────────
+    const audioContext = new AudioContext();
+    audioContext.suspend();
+
+    function initAudioContext() {
+        if (audioContext.state === "suspended") {
+            audioContext.resume();
+        }
+    }
+
+    function playHoverSound(kind = "soft") {
+        if (!audioContext || audioContext.state !== "running") {
+            return;
+        }
+
+        const osc = audioContext.createOscillator();
+        const gain = audioContext.createGain();
+        const now = audioContext.currentTime;
+
+        if (kind === "bright") {
+            // Triangle wave — higher, punchy click
+            osc.type = "triangle";
+            osc.frequency.setValueAtTime(580, now);
+            osc.frequency.exponentialRampToValueAtTime(696, now + 0.06);
+            gain.gain.setValueAtTime(0.0001, now);
+            gain.gain.linearRampToValueAtTime(0.04, now + 0.02);
+            gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.14);
+            osc.connect(gain);
+            gain.connect(audioContext.destination);
+            osc.start(now);
+            osc.stop(now + 0.15);
+        } else if (kind === "deep") {
+            // Sine wave — low resonant pulse for pathway cards
+            osc.type = "sine";
+            osc.frequency.setValueAtTime(190, now);
+            osc.frequency.exponentialRampToValueAtTime(168, now + 0.12);
+            gain.gain.setValueAtTime(0.0001, now);
+            gain.gain.linearRampToValueAtTime(0.055, now + 0.04);
+            gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.2);
+            osc.connect(gain);
+            gain.connect(audioContext.destination);
+            osc.start(now);
+            osc.stop(now + 0.22);
+        } else if (kind === "ping") {
+            // Sine wave — clean high-register ping for pathway cards
+            osc.type = "sine";
+            osc.frequency.setValueAtTime(880, now);
+            osc.frequency.exponentialRampToValueAtTime(760, now + 0.06);
+            gain.gain.setValueAtTime(0.0001, now);
+            gain.gain.linearRampToValueAtTime(0.032, now + 0.008);
+            gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.1);
+            osc.connect(gain);
+            gain.connect(audioContext.destination);
+            osc.start(now);
+            osc.stop(now + 0.11);
+        } else {
+            // soft (default) — triangle wave, lower register
+            osc.type = "triangle";
+            osc.frequency.setValueAtTime(410, now);
+            osc.frequency.exponentialRampToValueAtTime(492, now + 0.06);
+            gain.gain.setValueAtTime(0.0001, now);
+            gain.gain.linearRampToValueAtTime(0.04, now + 0.02);
+            gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.14);
+            osc.connect(gain);
+            gain.connect(audioContext.destination);
+            osc.start(now);
+            osc.stop(now + 0.15);
+        }
+    }
+
+    // ── Halo ──────────────────────────────────────────────────────────────
+    function randomMoveHalo() {
+        if (halos.length === 0) {
+            return;
+        }
+
+        const halo = halos[Math.floor(Math.random() * halos.length)];
+        if (!(halo instanceof HTMLElement)) {
+            return;
+        }
+
+        const maxX = Math.max(180, window.innerWidth * 0.22);
+        const maxY = Math.max(140, window.innerHeight * 0.2);
+        const tx = Math.round((Math.random() * 2 - 1) * maxX);
+        const ty = Math.round((Math.random() * 2 - 1) * maxY);
+        const scale = (0.82 + Math.random() * 0.4).toFixed(2);
+        halo.style.setProperty("--tx", `${tx}px`);
+        halo.style.setProperty("--ty", `${ty}px`);
+        halo.style.setProperty("--scale", scale);
+        halo.style.opacity = String(0.1 + Math.random() * 0.18);
+    }
+
+    function startHaloMotion() {
+        halos.forEach(() => randomMoveHalo());
+
+        setInterval(() => {
+            randomMoveHalo();
+        }, 2200);
+    }
+
+    // ── Cards ─────────────────────────────────────────────────────────────
+    function revealCards() {
+        cards
+            .sort(
+                (a, b) =>
+                    Number(a.getAttribute("data-stagger")) -
+                    Number(b.getAttribute("data-stagger")),
+            )
+            .forEach((card, index) => {
+                setTimeout(() => card.classList.add("is-visible"), index * 340);
+            });
+    }
+
+    // ── Subtitles ─────────────────────────────────────────────────────────
+    async function revealBentoSubtitle() {
+        for (const [index, word] of bentoSubtitleWords.entries()) {
+            setTimeout(() => word.classList.add("is-visible"), index * 220);
+        }
+
+        const total = bentoSubtitleWords.length * 220 + 500;
+        await new Promise((resolve) => setTimeout(resolve, total));
+    }
+
+    function watchPathwaysSubtitle() {
+        if (pathwaysSubtitleWords.length === 0) {
+            return;
+        }
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        pathwaysSubtitleWords.forEach((word, i) => {
+                            setTimeout(
+                                () => word.classList.add("is-visible"),
+                                i * 180,
+                            );
+                        });
+                        observer.disconnect();
+                    }
+                });
+            },
+            { threshold: 0.6 },
+        );
+
+        const parent = pathwaysSubtitleWords[0].parentElement;
+        if (parent) {
+            observer.observe(parent);
+        }
+    }
+
+    // ── Typewriter ────────────────────────────────────────────────────────
+    function buildHeadlineDOM(typed: string, accentStart: number, accentEnd: number) {
+        if (!typeNode) {
+            return;
+        }
+
+        typeNode.textContent = "";
+
+        const seg1 = typed.slice(0, accentStart);
+        const seg2 =
+            typed.length > accentStart
+                ? typed.slice(accentStart, Math.min(typed.length, accentEnd + 1))
+                : "";
+        const seg3 =
+            typed.length > accentEnd + 1 ? typed.slice(accentEnd + 1) : "";
+
+        if (seg1) {
+            const s = document.createElement("span");
+            s.className = "hl-normal";
+            s.textContent = seg1;
+            typeNode.appendChild(s);
+        }
+        if (seg2) {
+            const s = document.createElement("span");
+            s.className = "hl-muted";
+            s.textContent = seg2;
+            typeNode.appendChild(s);
+        }
+        if (seg3) {
+            const s = document.createElement("span");
+            s.className = "hl-normal";
+            s.textContent = seg3;
+            typeNode.appendChild(s);
+        }
+    }
+
+    async function runTypewriter() {
+        if (!typeNode) {
+            return;
+        }
+
+        const fullText = typeNode.getAttribute("data-fulltext") ?? "";
+        const accentStart = parseInt(
+            typeNode.getAttribute("data-accent-start") ?? "-1",
+            10,
+        );
+        const accentEnd = parseInt(
+            typeNode.getAttribute("data-accent-end") ?? "-1",
+            10,
+        );
+        const chars = [...fullText];
+        let typed = "";
+
+        for (const [index, char] of chars.entries()) {
+            typed += char;
+            buildHeadlineDOM(typed, accentStart, accentEnd);
+            const pause = char === "." || char === "?" ? 160 : 56;
+            await new Promise((resolve) => setTimeout(resolve, pause));
+
+            if (index === chars.length - 1) {
+                typeNode.classList.add("done");
+            }
+        }
+    }
+
+    // ── Interactions ──────────────────────────────────────────────────────
+    function wireInteractions() {
+        document.addEventListener("pointerdown", initAudioContext, {
+            once: true,
+        });
+        document.addEventListener("keydown", initAudioContext, { once: true });
+
+        document.querySelectorAll(".interactive").forEach((element) => {
+            element.addEventListener("mouseenter", () => {
+                playHoverSound(element.getAttribute("data-sound") || "soft");
+            });
+
+            element.addEventListener("focus", () => {
+                playHoverSound(element.getAttribute("data-sound") || "soft");
+            });
+        });
+
+        themeToggle?.addEventListener("click", () => {
+            const next =
+                document.body.getAttribute("data-theme") === "dark"
+                    ? "light"
+                    : "dark";
+            document.body.setAttribute("data-theme", next);
+        });
+    }
+
+    // ── Welcome Gate ──────────────────────────────────────────────────────
+    let gateA = 0;
+    let gateB = 0;
+
+    function generateChallenge() {
+        gateA = Math.floor(Math.random() * 9) + 1;
+        gateB = Math.floor(Math.random() * 9) + 1;
+        if (gateN1) gateN1.textContent = String(gateA);
+        if (gateN2) gateN2.textContent = String(gateB);
+    }
+
+    function openGate() {
+        if (!gate) {
+            return;
+        }
+
+        generateChallenge();
+        gate.showModal();
+        requestAnimationFrame(() =>
+            requestAnimationFrame(() => gate.classList.add("gate-open")),
+        );
+        if (gateInput) {
+            gateInput.focus();
+        }
+    }
+
+    function closeGate(withSound: boolean) {
+        if (!gate) {
+            return;
+        }
+
+        gate.close();
+
+        if (withSound) {
+            initAudioContext();
+            setTimeout(() => playHoverSound("bright"), 80);
+        }
+
+        sessionStorage.setItem("gate-passed", "1");
+    }
+
+    function validateAndSubmit() {
+        const answer = parseInt(gateInput?.value ?? "", 10);
+
+        if (isNaN(answer) || answer !== gateA + gateB) {
+            if (gateError) {
+                gateError.hidden = false;
+            }
+
+            if (gateInput) {
+                gateInput.classList.remove("gate-shake");
+                void gateInput.offsetWidth;
+                gateInput.classList.add("gate-shake");
+                gateInput.focus();
+            }
+
+            return;
+        }
+
+        if (gateError) {
+            gateError.hidden = true;
+        }
+
+        closeGate(true);
+    }
+
+    gateEnableBtn?.addEventListener("click", validateAndSubmit);
+    gateSkipBtn?.addEventListener("click", () => closeGate(false));
+
+    gateInput?.addEventListener("keydown", (e: KeyboardEvent) => {
+        if (e.key === "Enter") {
+            validateAndSubmit();
+        }
+    });
+
+    gate?.addEventListener("cancel", () => {
+        sessionStorage.setItem("gate-passed", "1");
+    });
+
+    // ── Boot ──────────────────────────────────────────────────────────────
+    startHaloMotion();
+    wireInteractions();
+    watchPathwaysSubtitle();
+
+    setTimeout(async () => {
+        await runTypewriter();
+        await revealBentoSubtitle();
+        revealCards();
+    }, 1650);
+
+    if (!sessionStorage.getItem("gate-passed")) {
+        setTimeout(openGate, 900);
+    }
+</script>

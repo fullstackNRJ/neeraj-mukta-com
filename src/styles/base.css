@@ -1,0 +1,78 @@
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    min-height: 100%;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--surface);
+    color: var(--on-surface);
+    line-height: 1.6;
+    position: relative;
+    overflow-x: hidden;
+    transition: background-color 500ms ease, color 500ms ease;
+}
+
+.canvas {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -2;
+    background-image: var(--dotted-grid);
+    background-size: 22px 22px;
+    opacity: 0.6;
+    mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+}
+
+.halo-layer {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.halo {
+    position: absolute;
+    width: 28rem;
+    height: 28rem;
+    border-radius: 999px;
+    filter: blur(80px);
+    opacity: 0.18;
+    transition: transform 1300ms ease, opacity 1300ms ease;
+    background: radial-gradient(circle, rgba(115, 239, 209, 0.35) 0%, rgba(115, 239, 209, 0) 70%);
+    transform: translate(var(--tx, 0), var(--ty, 0)) scale(var(--scale, 1));
+}
+
+.halo-a {
+    top: -8rem;
+    left: -6rem;
+}
+
+.halo-b {
+    top: 22%;
+    right: -8rem;
+}
+
+.halo-c {
+    bottom: -10rem;
+    left: 35%;
+}
+
+.layout {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 7.5rem 1rem 4rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
+}

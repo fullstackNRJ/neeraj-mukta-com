@@ -1,0 +1,38 @@
+---
+import BackgroundEffects from "../components/layout/BackgroundEffects.astro";
+import Footer from "../components/layout/Footer.astro";
+import Navbar from "../components/layout/Navbar.astro";
+import PageEnhancements from "../components/layout/PageEnhancements.astro";
+import HomeContent from "../components/home/HomeContent.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const seo = {
+    title: "Neeraj Mukta | The Digital Curator",
+    description:
+        "One engineer with four perspectives: startup founder, recruiter, agency partner, and growth-focused builder.",
+    keywords: [
+        "neeraj mukta",
+        "digital curator",
+        "portfolio",
+        "startup founder",
+        "full stack engineer",
+        "technical seo",
+    ],
+    jsonLd: {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        name: "Neeraj Mukta Portfolio",
+        description:
+            "Editorial-style portfolio featuring product engineering, technical architecture, and growth-driven execution.",
+        url: Astro.site ? Astro.site.toString() : "https://neeraj-mukta.com",
+    },
+};
+---
+
+<BaseLayout {...seo}>
+    <BackgroundEffects />
+    <Navbar />
+    <HomeContent />
+    <Footer />
+    <PageEnhancements />
+</BaseLayout>

@@ -1,0 +1,46 @@
+---
+import FounderContent from "../components/founder/FounderContent.astro";
+import FounderEnhancements from "../components/founder/FounderEnhancements.astro";
+import BackgroundEffects from "../components/layout/BackgroundEffects.astro";
+import Footer from "../components/layout/Footer.astro";
+import Navbar from "../components/layout/Navbar.astro";
+import PageEnhancements from "../components/layout/PageEnhancements.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const seo = {
+    title: "Startup Founder MVP Sprint | Neeraj Mukta",
+    description:
+        "Launch your market-ready MVP in weeks, not months. Built for startup founders who need speed, clarity, and execution.",
+    keywords: [
+        "startup founder",
+        "mvp development",
+        "launch fast",
+        "product sprint",
+        "cloudflare",
+        "full stack development",
+    ],
+    type: "article" as const,
+    canonical: "https://neeraj-mukta.com/startup-founder",
+    jsonLd: {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        name: "Startup Founder MVP Sprint",
+        description:
+            "Design and development sprint to turn startup concepts into launch-ready MVPs with technical and product rigor.",
+        provider: {
+            "@type": "Person",
+            name: "Neeraj Mukta",
+        },
+        areaServed: "Global",
+    },
+};
+---
+
+<BaseLayout {...seo}>
+    <BackgroundEffects />
+    <Navbar />
+    <FounderContent />
+    <Footer />
+    <PageEnhancements />
+    <FounderEnhancements />
+</BaseLayout>

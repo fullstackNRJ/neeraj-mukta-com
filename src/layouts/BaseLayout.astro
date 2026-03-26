@@ -1,0 +1,150 @@
+---
+import "../styles/global.css";
+
+interface SeoJsonLd {
+    [key: string]: unknown;
+}
+
+interface Props {
+    title?: string;
+    description?: string;
+    canonical?: string;
+    image?: string;
+    type?: "website" | "article";
+    keywords?: string | string[];
+    author?: string;
+    lang?: string;
+    noindex?: boolean;
+    themeColor?: string;
+    twitterCard?: "summary" | "summary_large_image";
+    publishedTime?: string;
+    modifiedTime?: string;
+    jsonLd?: SeoJsonLd | SeoJsonLd[];
+}
+
+const {
+    title = "Neeraj Mukta | The Digital Curator",
+    description = "Editorial-style portfolio for product engineering, agency collaboration, and growth-focused digital experiences.",
+    canonical,
+    image = "/favicon.svg",
+    type = "website",
+    keywords = [
+        "Neeraj Mukta",
+        "portfolio",
+        "full stack engineer",
+        "product engineering",
+        "astro",
+        "cloudflare workers",
+    ],
+    author = "Neeraj Mukta",
+    lang = "en",
+    noindex = false,
+    themeColor = "#0e0e0e",
+    twitterCard = "summary_large_image",
+    publishedTime,
+    modifiedTime,
+    jsonLd,
+} = Astro.props;
+
+const siteUrl = Astro.site ? Astro.site.toString() : "https://neeraj-mukta.com";
+
+function toAbsoluteUrl(url: string) {
+    if (/^https?:\/\//i.test(url)) {
+        return url;
+    }
+    return new URL(url, siteUrl).toString();
+}
+
+const resolvedCanonical = canonical ?? Astro.url.toString();
+const resolvedImage = toAbsoluteUrl(image);
+const keywordContent = Array.isArray(keywords) ? keywords.join(", ") : keywords;
+
+const defaultJsonLd: SeoJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "Neeraj Mukta",
+    url: siteUrl,
+    description,
+};
+
+const jsonLdBlocks = Array.isArray(jsonLd)
+    ? jsonLd
+    : jsonLd
+      ? [jsonLd]
+      : [defaultJsonLd];
+---
+
+<html lang={lang} prefix="og: https://ogp.me/ns#">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="generator" content={Astro.generator} />
+
+        <title>{title}</title>
+        <meta name="description" content={description} />
+        <meta name="author" content={author} />
+        <meta name="keywords" content={keywordContent} />
+        <meta name="theme-color" content={themeColor} />
+        <meta
+            name="robots"
+            content={noindex
+                ? "noindex, nofollow"
+                : "index, follow, max-image-preview:large"}
+        />
+
+        <link rel="canonical" href={resolvedCanonical} />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+            rel="preconnect"
+            href="https://fonts.gstatic.com"
+            crossorigin="anonymous"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+            rel="stylesheet"
+        />
+
+        <meta property="og:locale" content="en_US" />
+        <meta property="og:type" content={type} />
+        <meta property="og:site_name" content="Neeraj Mukta" />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:url" content={resolvedCanonical} />
+        <meta property="og:image" content={resolvedImage} />
+
+        <meta name="twitter:card" content={twitterCard} />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={description} />
+        <meta name="twitter:image" content={resolvedImage} />
+
+        {
+            publishedTime && (
+                <meta
+                    property="article:published_time"
+                    content={publishedTime}
+                />
+            )
+        }
+        {
+            modifiedTime && (
+                <meta property="article:modified_time" content={modifiedTime} />
+            )
+        }
+
+        {
+            jsonLdBlocks.map((schema) => (
+                <script
+                    type="application/ld+json"
+                    set:html={JSON.stringify(schema)}
+                />
+            ))
+        }
+
+        <slot name="head" />
+    </head>
+    <body data-theme="dark">
+        <slot />
+    </body>
+</html>
