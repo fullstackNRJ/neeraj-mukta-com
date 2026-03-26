@@ -1,0 +1,48 @@
+---
+import AgencyContent from "../components/agency/AgencyContent.astro";
+import AgencyEnhancements from "../components/agency/AgencyEnhancements.astro";
+import AgencyFooter from "../components/agency/AgencyFooter.astro";
+import AgencyNavbar from "../components/agency/AgencyNavbar.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const seo = {
+    title: "Agency Partner | The Technical Atelier | Neeraj Mukta",
+    description:
+        "High-fidelity technical execution for creative agencies. White-label engineering, complex Webflow builds, and scalable product architecture.",
+    keywords: [
+        "agency partner",
+        "technical atelier",
+        "white-label development",
+        "creative engineering",
+        "webflow systems",
+        "agency overflow support",
+    ],
+    type: "article" as const,
+    canonical: "https://neeraj-mukta.com/for-agencies",
+    jsonLd: {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        name: "Agency Technical Partnership",
+        description:
+            "Strategic technical partnership for creative agencies requiring high-end execution, performance optimization, and scalable engineering.",
+        provider: {
+            "@type": "Person",
+            name: "Neeraj Mukta",
+        },
+        areaServed: "Global",
+    },
+};
+---
+
+<BaseLayout {...seo}>
+    <Fragment slot="head">
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+        />
+    </Fragment>
+    <AgencyNavbar />
+    <AgencyContent />
+    <AgencyFooter />
+    <AgencyEnhancements />
+</BaseLayout>
