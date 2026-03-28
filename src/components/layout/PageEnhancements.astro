@@ -191,9 +191,17 @@
     function startHaloMotion() {
         halos.forEach(() => randomMoveHalo());
 
-        const _haloInterval = setInterval(() => {
+        const haloInterval = setInterval(() => {
             randomMoveHalo();
         }, 2200);
+
+        document.addEventListener(
+            "visibilitychange",
+            () => {
+                if (document.hidden) clearInterval(haloInterval);
+            },
+            { once: true },
+        );
     }
 
     // ── Cards ─────────────────────────────────────────────────────────────
