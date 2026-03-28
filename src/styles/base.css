@@ -25,6 +25,35 @@ select {
     font: inherit;
 }
 
+/* ── Skip-to-main link ──────────────────────────────────────────────────────── */
+
+.skip-to-main {
+    position: absolute;
+    top: -100%;
+    left: 1rem;
+    z-index: 9999;
+    padding: 0.6rem 1rem;
+    border-radius: var(--radius-md);
+    background: var(--primary);
+    color: var(--on-primary);
+    font-weight: 700;
+    font-size: 0.875rem;
+    text-decoration: none;
+    transition: top 180ms ease;
+}
+
+.skip-to-main:focus {
+    top: 1rem;
+}
+
+/* ── Focus styles ───────────────────────────────────────────────────────────── */
+
+:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+
 .canvas {
     position: fixed;
     inset: 0;
@@ -34,6 +63,7 @@ select {
     background-size: 22px 22px;
     opacity: 0.6;
     mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
 }
 
 .halo-layer {
@@ -78,8 +108,12 @@ select {
 }
 
 @media (prefers-reduced-motion: reduce) {
-    * {
-        animation: none !important;
-        transition: none !important;
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
     }
 }

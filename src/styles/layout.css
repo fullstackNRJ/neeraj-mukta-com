@@ -21,6 +21,7 @@
     border-radius: var(--radius-lg);
     background: color-mix(in srgb, var(--surface-variant) 70%, transparent);
     backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
 }
 

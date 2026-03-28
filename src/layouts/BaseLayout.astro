@@ -93,6 +93,7 @@ const jsonLdBlocks = Array.isArray(jsonLd)
         />
 
         <link rel="canonical" href={resolvedCanonical} />
+        <link rel="sitemap" href="/sitemap.xml" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="icon" href="/favicon.ico" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -115,6 +116,8 @@ const jsonLdBlocks = Array.isArray(jsonLd)
         <meta property="og:image" content={resolvedImage} />
 
         <meta name="twitter:card" content={twitterCard} />
+        <meta name="twitter:site" content="@neerajmukta" />
+        <meta name="twitter:creator" content="@neerajmukta" />
         <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content={description} />
         <meta name="twitter:image" content={resolvedImage} />
@@ -145,6 +148,7 @@ const jsonLdBlocks = Array.isArray(jsonLd)
         <slot name="head" />
     </head>
     <body data-theme="dark">
+        <a class="skip-to-main" href="#main-content">Skip to main content</a>
         <slot />
     </body>
 </html>

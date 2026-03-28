@@ -85,23 +85,35 @@
     const gateSkipBtn = document.querySelector("#gate-skip");
 
     // ── Audio ─────────────────────────────────────────────────────────────
-    const audioContext = new AudioContext();
-    audioContext.suspend();
+    let audioContext: AudioContext | null = null;
+
+    function getAudioContext(): AudioContext | null {
+        if (!audioContext) {
+            try {
+                audioContext = new AudioContext();
+            } catch {
+                return null;
+            }
+        }
+        return audioContext;
+    }
 
     function initAudioContext() {
-        if (audioContext.state === "suspended") {
-            audioContext.resume();
+        const ctx = getAudioContext();
+        if (ctx?.state === "suspended") {
+            ctx.resume();
         }
     }
 
     function playHoverSound(kind = "soft") {
-        if (!audioContext || audioContext.state !== "running") {
+        const ctx = getAudioContext();
+        if (!ctx || ctx.state !== "running") {
             return;
         }
 
-        const osc = audioContext.createOscillator();
-        const gain = audioContext.createGain();
-        const now = audioContext.currentTime;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        const now = ctx.currentTime;
 
         if (kind === "bright") {
             // Triangle wave — higher, punchy click
@@ -112,7 +124,7 @@
             gain.gain.linearRampToValueAtTime(0.04, now + 0.02);
             gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.14);
             osc.connect(gain);
-            gain.connect(audioContext.destination);
+            gain.connect(ctx.destination);
             osc.start(now);
             osc.stop(now + 0.15);
         } else if (kind === "deep") {
@@ -124,7 +136,7 @@
             gain.gain.linearRampToValueAtTime(0.055, now + 0.04);
             gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.2);
             osc.connect(gain);
-            gain.connect(audioContext.destination);
+            gain.connect(ctx.destination);
             osc.start(now);
             osc.stop(now + 0.22);
         } else if (kind === "ping") {
@@ -136,7 +148,7 @@
             gain.gain.linearRampToValueAtTime(0.032, now + 0.008);
             gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.1);
             osc.connect(gain);
-            gain.connect(audioContext.destination);
+            gain.connect(ctx.destination);
             osc.start(now);
             osc.stop(now + 0.11);
         } else {
@@ -148,7 +160,7 @@
             gain.gain.linearRampToValueAtTime(0.04, now + 0.02);
             gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.14);
             osc.connect(gain);
-            gain.connect(audioContext.destination);
+            gain.connect(ctx.destination);
             osc.start(now);
             osc.stop(now + 0.15);
         }
@@ -179,7 +191,7 @@
     function startHaloMotion() {
         halos.forEach(() => randomMoveHalo());
 
-        setInterval(() => {
+        const _haloInterval = setInterval(() => {
             randomMoveHalo();
         }, 2200);
     }
@@ -336,6 +348,7 @@
     // ── Welcome Gate ──────────────────────────────────────────────────────
     let gateA = 0;
     let gateB = 0;
+    let elementBeforeGate: HTMLElement | null = null;
 
     function generateChallenge() {
         gateA = Math.floor(Math.random() * 9) + 1;
@@ -348,6 +361,11 @@
         if (!gate) {
             return;
         }
+
+        elementBeforeGate =
+            document.activeElement instanceof HTMLElement
+                ? document.activeElement
+                : null;
 
         generateChallenge();
         gate.showModal();
@@ -365,6 +383,11 @@
         }
 
         gate.close();
+
+        const returnFocus =
+            elementBeforeGate ??
+            document.querySelector<HTMLElement>("main h1, main, body");
+        returnFocus?.focus();
 
         if (withSound) {
             initAudioContext();
