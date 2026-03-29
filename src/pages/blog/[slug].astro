@@ -1,0 +1,78 @@
+---
+import { getEntry, render } from "astro:content";
+import "../../styles/pages/blog.css";
+import BackgroundEffects from "../../components/layout/BackgroundEffects.astro";
+import Footer from "../../components/layout/Footer.astro";
+import Navbar from "../../components/layout/Navbar.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const slug = Astro.params.slug;
+const post = slug ? await getEntry("blog", slug) : undefined;
+
+if (!post || post.data.draft) {
+    return Astro.redirect("/blog");
+}
+
+const { Content } = await render(post);
+
+const seo = {
+    title: `${post.data.title} | Neeraj Mukta`,
+    description: post.data.description,
+    keywords: post.data.tags,
+    type: "article" as const,
+    canonical: `https://neeraj-mukta.com/blog/${post.id}`,
+    publishedTime: post.data.publishedAt.toISOString(),
+    modifiedTime: post.data.updatedAt?.toISOString(),
+    jsonLd: {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        headline: post.data.title,
+        description: post.data.description,
+        datePublished: post.data.publishedAt.toISOString(),
+        dateModified:
+            post.data.updatedAt?.toISOString() ??
+            post.data.publishedAt.toISOString(),
+        author: {
+            "@type": "Person",
+            name: "Neeraj Mukta",
+        },
+        mainEntityOfPage: `https://neeraj-mukta.com/blog/${post.id}`,
+    },
+};
+---
+
+<BaseLayout {...seo}>
+    <BackgroundEffects />
+    <Navbar />
+
+    <main class="layout blog-post-layout">
+        <article class="blog-post-shell">
+            <a class="blog-back-link interactive" href="/blog">← Back to Blog</a
+            >
+            <p class="blog-post-folder">{post.data.folder}</p>
+            <h1 class="blog-post-title">{post.data.title}</h1>
+            <p class="blog-post-excerpt">{post.data.excerpt}</p>
+            <div class="blog-post-meta">
+                <time datetime={post.data.publishedAt.toISOString()}>
+                    {
+                        new Intl.DateTimeFormat("en-US", {
+                            month: "long",
+                            day: "2-digit",
+                            year: "numeric",
+                        }).format(post.data.publishedAt)
+                    }
+                </time>
+                <span>{post.data.readTime}</span>
+            </div>
+            <div class="blog-post-tags">
+                {post.data.tags.map((tag) => <span>#{tag}</span>)}
+            </div>
+
+            <div class="blog-post-body prose">
+                <Content />
+            </div>
+        </article>
+    </main>
+
+    <Footer />
+</BaseLayout>

@@ -1,0 +1,224 @@
+---
+import type { CollectionEntry } from "astro:content";
+import "../../styles/pages/blog.css";
+
+interface Props {
+    posts: CollectionEntry<"blog">[];
+}
+
+const { posts } = Astro.props;
+
+const sortedPosts = [...posts].sort(
+    (a, b) =>
+        b.data.publishedAt.getTime() - a.data.publishedAt.getTime(),
+);
+
+const featuredPost = sortedPosts.find((post) => post.data.featured) ?? sortedPosts[0];
+const nonFeaturedPosts = featuredPost
+    ? sortedPosts.filter((post) => post.id !== featuredPost.id)
+    : sortedPosts;
+const sidePosts = nonFeaturedPosts.slice(0, 2);
+const archivePosts = nonFeaturedPosts.slice(2, 5);
+
+const totalReadMinutes = sortedPosts.reduce((total, post) => {
+    const minuteMatch = post.data.readTime.match(/\d+/);
+    return total + (minuteMatch ? Number(minuteMatch[0]) : 0);
+}, 0);
+
+const allTags = Array.from(new Set(sortedPosts.flatMap((post) => post.data.tags))).sort(
+    (a, b) => a.localeCompare(b),
+);
+
+const groupedPosts = sortedPosts.reduce<Record<string, CollectionEntry<"blog">[]>>(
+    (acc, post) => {
+        const folderName = post.data.folder;
+
+        if (!acc[folderName]) {
+            acc[folderName] = [];
+        }
+
+        acc[folderName].push(post);
+        return acc;
+    },
+    {},
+);
+
+const folderEntries = Object.entries(groupedPosts).sort(([a], [b]) =>
+    a.localeCompare(b),
+);
+
+const dateFormatter = new Intl.DateTimeFormat("en-US", {
+    month: "short",
+    day: "2-digit",
+    year: "numeric",
+});
+---
+
+<main class="layout blog-layout" data-blog-root data-blog-view="normal">
+    <section class="blog-hero">
+        <div>
+            <p class="blog-kicker">Curation No. 04</p>
+            <h1 class="blog-title">The Library</h1>
+            <p class="blog-subtitle">
+                A curated collection of long-form essays and technical field notes
+                spanning product engineering, AI systems, and digital philosophy.
+            </p>
+        </div>
+
+        <div class="blog-controls" aria-label="Blog view controls">
+            <span class="blog-controls-label">View</span>
+            <button
+                id="blogViewToggle"
+                class="blog-view-toggle mode-toggle interactive"
+                type="button"
+                role="switch"
+                aria-checked="false"
+                aria-label="Enable folder view"
+            >
+                <span class="blog-view-option">Normal</span>
+                <span class="toggle-track" aria-hidden="true"
+                    ><span class="toggle-thumb"></span></span
+                >
+                <span class="blog-view-option">Folder</span>
+            </button>
+        </div>
+    </section>
+
+    <section class="blog-normal-view" aria-label="Normal blog view">
+        <div class="blog-feature-grid">
+            {
+                featuredPost && (
+                    <article class="blog-feature-card">
+                        <a class="blog-feature-link" href={`/blog/${featuredPost.id}`}>
+                            <p class="blog-feature-folder">Essay - {featuredPost.data.folder}</p>
+                            <h2>{featuredPost.data.title}</h2>
+                            <p>{featuredPost.data.excerpt}</p>
+                            <div class="blog-feature-meta">
+                                <span>Read Essay</span>
+                                <span>{featuredPost.data.readTime}</span>
+                            </div>
+                        </a>
+                    </article>
+                )
+            }
+
+            <aside class="blog-side-stack" aria-label="Recent highlights">
+                {
+                    sidePosts.map((post) => (
+                        <article class="blog-side-card">
+                            <a href={`/blog/${post.id}`}>
+                                <p>{post.data.folder}</p>
+                                <h3>{post.data.title}</h3>
+                                <span>{dateFormatter.format(post.data.publishedAt)} - {post.data.readTime}</span>
+                            </a>
+                        </article>
+                    ))
+                }
+            </aside>
+        </div>
+
+        <div class="blog-archive-modules">
+            <article class="blog-quote-card">
+                <span aria-hidden="true">"</span>
+                <p>Good design is as little design as possible.</p>
+                <strong>Dieter Rams</strong>
+            </article>
+
+            <article class="blog-atmosphere-card">
+                <div class="blog-atmosphere-orb" aria-hidden="true"></div>
+                <p>Atmosphere 01</p>
+            </article>
+
+            <article class="blog-recent-archive">
+                <header>
+                    <h3>Recent Archives</h3>
+                    <a href="/blog">View all</a>
+                </header>
+                <ul>
+                    {
+                        archivePosts.map((post, index) => (
+                            <li>
+                                <a href={`/blog/${post.id}`}>
+                                    <span>{String(index + 1).padStart(2, "0")}</span>
+                                    <span>{post.data.title}</span>
+                                    <span>{dateFormatter.format(post.data.publishedAt)}</span>
+                                </a>
+                            </li>
+                        ))
+                    }
+                </ul>
+            </article>
+        </div>
+    </section>
+
+    <section class="blog-folder-view" aria-label="Folder blog view">
+        <div class="folder-showcase-grid">
+            {
+                folderEntries.map(([folderName, folderPosts]) => (
+                    <article class="folder-showcase-card">
+                        <header class="folder-showcase-header">
+                            <p class="folder-kicker">Category</p>
+                            <h2>{folderName}</h2>
+                            <p>{folderPosts.length} articles in this folder</p>
+                        </header>
+                        <ul class="folder-preview-list">
+                            {folderPosts.slice(0, 3).map((post) => (
+                                <li>
+                                    <a href={`/blog/${post.id}`}>
+                                        <span>{post.data.title}</span>
+                                        <span>{post.data.readTime}</span>
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
+                        {
+                            folderPosts[0] && (
+                                <a class="folder-open-link" href={`/blog/${folderPosts[0].id}`}>
+                                    Open Folder
+                                </a>
+                            )
+                        }
+                    </article>
+                ))
+            }
+        </div>
+
+        <div class="folder-stats-rail">
+            <article class="folder-stats-card">
+                <p>Archive Stats</p>
+                <div>
+                    <span>Total Essays</span>
+                    <strong>{sortedPosts.length}</strong>
+                </div>
+                <div>
+                    <span>Reading Time</span>
+                    <strong>{(totalReadMinutes / 60).toFixed(1)}h</strong>
+                </div>
+            </article>
+
+            <article class="folder-identity-card">
+                <p>Artificial Intelligence</p>
+                <span>The architecture of synthetic consciousness.</span>
+            </article>
+        </div>
+
+        {
+            featuredPost && (
+                <article class="folder-feature-experiment">
+                    <a href={`/blog/${featuredPost.id}`}>
+                        <p>Featured Experiment</p>
+                        <h3>{featuredPost.data.title}</h3>
+                        <span>{featuredPost.data.excerpt}</span>
+                    </a>
+                </article>
+            )
+        }
+    </section>
+
+    <section class="blog-tag-filter" aria-label="Filter by tag">
+        <p>Filter by tag</p>
+        <div>
+            {allTags.map((tag) => <button type="button">{tag}</button>)}
+        </div>
+    </section>
+</main>

@@ -1,0 +1,369 @@
+---
+import "../../styles/pages/genai.css";
+---
+
+<main class="genai-page">
+    <!-- Hero Section -->
+    <section class="genai-hero genai-shell" id="hero">
+        <div class="genai-hero-grid">
+            <div class="genai-hero-copy">
+                <div
+                    class="genai-badge"
+                    data-genai-reveal="up"
+                    style="--stagger: 0;"
+                >
+                    <span class="badge-dot"></span>
+                    Intelligent Infrastructure
+                </div>
+                <h1
+                    class="genai-headline"
+                    data-genai-reveal="up"
+                    style="--stagger: 1;"
+                >
+                    Production-Ready<br /><span class="genai-accent"
+                        >Gen AI</span
+                    ><br />for Real Teams.
+                </h1>
+                <p
+                    class="genai-subtext"
+                    data-genai-reveal="up"
+                    style="--stagger: 2;"
+                >
+                    I design and ship applied AI systems that move beyond demos:
+                    retrieval pipelines, copilots, evaluation loops, agent
+                    orchestration, and internal automation that teams can trust
+                    in production.
+                </p>
+                <div
+                    class="genai-cta-group"
+                    data-genai-reveal="up"
+                    style="--stagger: 3;"
+                >
+                    <a
+                        class="genai-btn genai-btn-primary interactive"
+                        href="#request">Plan an AI System</a
+                    >
+                    <a
+                        class="genai-btn genai-btn-secondary interactive"
+                        href="#portfolio">View Case Studies</a
+                    >
+                </div>
+            </div>
+            <div
+                class="genai-hero-visual"
+                data-genai-reveal="up"
+                style="--stagger: 3;"
+            >
+                <div class="genai-visual-card">
+                    <div class="genai-visual-placeholder">
+                        <span
+                            class="material-symbols-outlined"
+                            aria-hidden="true">smart_toy</span
+                        >
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- System Stack Components -->
+    <section class="genai-capabilities genai-shell" id="capabilities">
+        <div class="genai-section-header" data-genai-reveal="left">
+            <h2 class="genai-section-title">System Stack Components</h2>
+            <p class="genai-section-desc">
+                The building blocks I use to make AI features observable, safe,
+                and useful once they hit real traffic.
+            </p>
+        </div>
+
+        <div class="genai-components-grid">
+            <article
+                class="genai-component-card genai-component-card-dark"
+                data-genai-reveal="up"
+                style="--stagger: 0;"
+            >
+                <div class="genai-card-header">
+                    <div class="genai-icon-surface">
+                        <span
+                            class="material-symbols-outlined"
+                            aria-hidden="true">architecture</span
+                        >
+                    </div>
+                    <span class="genai-card-label">Retrieval</span>
+                </div>
+                <h3>RAG Foundations</h3>
+                <p>
+                    Retrieval systems with chunking strategy, ranking,
+                    citations, and guardrails so answers stay grounded in your
+                    actual business context.
+                </p>
+            </article>
+
+            <article
+                class="genai-component-card"
+                data-genai-reveal="up"
+                style="--stagger: 1;"
+            >
+                <div class="genai-card-header">
+                    <div class="genai-icon-surface">
+                        <span
+                            class="material-symbols-outlined"
+                            aria-hidden="true">settings_remote</span
+                        >
+                    </div>
+                    <span class="genai-card-label">Workflow</span>
+                </div>
+                <h3>Agent Workflows</h3>
+                <p>
+                    Multi-step agent behavior for research, drafting,
+                    classification, triage, and back-office execution with
+                    traceable handoffs.
+                </p>
+            </article>
+
+            <article
+                class="genai-component-card genai-component-card-wide genai-component-card-highlight"
+                data-genai-reveal="up"
+                style="--stagger: 2;"
+            >
+                <div class="genai-card-header">
+                    <div class="genai-icon-surface">
+                        <span
+                            class="material-symbols-outlined"
+                            aria-hidden="true">cloud_upload</span
+                        >
+                    </div>
+                    <span class="genai-card-label">Application Layer</span>
+                </div>
+                <div class="genai-card-content">
+                    <div>
+                        <h3>Copilots & Internal Tools</h3>
+                        <p>
+                            AI-enabled products with human review, role-aware
+                            interfaces, feedback capture, and usage analytics
+                            built directly into the workflow.
+                        </p>
+                    </div>
+                    <div class="genai-tech-tags">
+                        <span class="tech-tag">OPENAI</span>
+                        <span class="tech-tag">ANTHROPIC</span>
+                        <span class="tech-tag">LANGGRAPH</span>
+                    </div>
+                </div>
+            </article>
+
+            <article
+                class="genai-component-card genai-component-card-secondary"
+                data-genai-reveal="up"
+                style="--stagger: 3;"
+            >
+                <div class="genai-card-header">
+                    <div class="genai-icon-surface">
+                        <span
+                            class="material-symbols-outlined"
+                            aria-hidden="true">assessment</span
+                        >
+                    </div>
+                    <span class="genai-card-label">Quality</span>
+                </div>
+                <h3>Evals & Monitoring</h3>
+                <p>
+                    Prompt regression checks, output scoring, hallucination
+                    monitoring, and production feedback loops to keep quality
+                    stable over time.
+                </p>
+            </article>
+        </div>
+    </section>
+
+    <section class="genai-marquee" id="stack" aria-label="Technology stack">
+        <div class="genai-marquee-track">
+            <span class="genai-marquee-word">RAG</span>
+            <span
+                class="material-symbols-outlined genai-marquee-separator"
+                aria-hidden="true">token</span
+            >
+            <span class="genai-marquee-word">AGENTS</span>
+            <span
+                class="material-symbols-outlined genai-marquee-separator"
+                aria-hidden="true">token</span
+            >
+            <span class="genai-marquee-word">EVALS</span>
+            <span
+                class="material-symbols-outlined genai-marquee-separator"
+                aria-hidden="true">token</span
+            >
+            <span class="genai-marquee-word">MCP</span>
+            <span
+                class="material-symbols-outlined genai-marquee-separator"
+                aria-hidden="true">token</span
+            >
+            <span class="genai-marquee-word">VECTOR DB</span>
+            <span
+                class="material-symbols-outlined genai-marquee-separator"
+                aria-hidden="true">token</span
+            >
+            <span class="genai-marquee-word">WORKFLOWS</span>
+            <span
+                class="material-symbols-outlined genai-marquee-separator"
+                aria-hidden="true">token</span
+            >
+            <span class="genai-marquee-word">RAG</span>
+            <span
+                class="material-symbols-outlined genai-marquee-separator"
+                aria-hidden="true">token</span
+            >
+            <span class="genai-marquee-word">AGENTS</span>
+            <span
+                class="material-symbols-outlined genai-marquee-separator"
+                aria-hidden="true">token</span
+            >
+            <span class="genai-marquee-word">EVALS</span>
+            <span
+                class="material-symbols-outlined genai-marquee-separator"
+                aria-hidden="true">token</span
+            >
+            <span class="genai-marquee-word">MCP</span>
+        </div>
+    </section>
+
+    <section class="genai-portfolio genai-shell" id="portfolio">
+        <div class="genai-section-header" data-genai-reveal="left">
+            <h2 class="genai-section-title">Selected Systems</h2>
+            <div class="genai-portfolio-nav">
+                <a href="#request" class="genai-view-link"
+                    >Discuss a similar build →</a
+                >
+            </div>
+        </div>
+
+        <div class="genai-portfolio-grid">
+            <article
+                class="genai-portfolio-item"
+                data-genai-reveal="up"
+                style="--stagger: 0;"
+            >
+                <div class="genai-portfolio-visual">
+                    <div
+                        class="genai-portfolio-placeholder genai-portfolio-placeholder-1"
+                    >
+                        <span
+                            class="material-symbols-outlined"
+                            aria-hidden="true">forum</span
+                        >
+                    </div>
+                </div>
+                <h3 class="genai-portfolio-title">Support Copilot</h3>
+                <p class="genai-portfolio-desc">
+                    Grounded retrieval assistant for support teams with
+                    citations, escalation routing, and agent handoff.
+                </p>
+            </article>
+
+            <article
+                class="genai-portfolio-item"
+                data-genai-reveal="up"
+                style="--stagger: 1;"
+            >
+                <div class="genai-portfolio-visual">
+                    <div
+                        class="genai-portfolio-placeholder genai-portfolio-placeholder-2"
+                    >
+                        <span
+                            class="material-symbols-outlined"
+                            aria-hidden="true">hub</span
+                        >
+                    </div>
+                </div>
+                <h3 class="genai-portfolio-title">Ops Automation Engine</h3>
+                <p class="genai-portfolio-desc">
+                    Internal agent workflow that classifies requests, drafts
+                    actions, and pushes approved updates into downstream
+                    systems.
+                </p>
+            </article>
+        </div>
+    </section>
+
+    <section class="genai-library genai-shell" id="library">
+        <div class="genai-section-header" data-genai-reveal="left">
+            <h2 class="genai-section-title">AI Delivery Toolkit</h2>
+            <p class="genai-section-desc">
+                The supporting practices that keep model behavior measurable,
+                governable, and easier to evolve.
+            </p>
+        </div>
+
+        <div class="genai-library-grid">
+            <article
+                class="genai-library-entry"
+                data-genai-reveal="up"
+                style="--stagger: 0;"
+            >
+                <div class="genai-library-header">
+                    <h3>Evaluation Harness</h3>
+                    <span class="genai-status-badge">PUBLISHED</span>
+                </div>
+                <p>
+                    Scenario-based test cases for prompts, retrieval relevance,
+                    answer faithfulness, and regression detection before
+                    rollout.
+                </p>
+                <div class="genai-library-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Regression Coverage</span>
+                        <span class="stat-value">98%</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Review Traceability</span>
+                        <span class="stat-value">100%</span>
+                    </div>
+                </div>
+            </article>
+
+            <article
+                class="genai-library-entry"
+                data-genai-reveal="up"
+                style="--stagger: 1;"
+            >
+                <div class="genai-library-header">
+                    <h3>PromptOps Playbook</h3>
+                    <span class="genai-status-badge genai-status-beta"
+                        >BETA</span
+                    >
+                </div>
+                <p>
+                    Versioning, rollback, prompt review, and fallback patterns
+                    for teams treating prompts like production assets.
+                </p>
+                <div class="genai-library-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Rollout Safety</span>
+                        <span class="stat-value">A+</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Operational Fit</span>
+                        <span class="stat-value">High</span>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <section class="genai-cta-section genai-shell" id="request">
+        <div class="genai-cta-content">
+            <h2 class="genai-cta-headline">Ready to ship<br />useful AI?</h2>
+            <p class="genai-cta-subtext">
+                If you need a Gen AI system that respects product constraints,
+                operational risk, and real users, this is the right place to
+                start.
+            </p>
+            <a
+                class="genai-btn genai-btn-primary genai-btn-large interactive"
+                href="mailto:hello@neeraj-mukta.com"
+            >
+                Book Strategy Session
+            </a>
+        </div>
+    </section>
+</main>

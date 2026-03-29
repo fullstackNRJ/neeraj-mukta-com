@@ -1,0 +1,45 @@
+---
+import MobileContent from "../components/mobile/MobileContent.astro";
+import MobileEnhancements from "../components/mobile/MobileEnhancements.astro";
+import MobileNavbar from "../components/mobile/MobileNavbar.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const seo = {
+    title: "Mobile Dev Expert | Neeraj Mukta",
+    description:
+        "High-fidelity mobile engineering for iOS, Android, and web apps with performance-first architecture and polished UX.",
+    keywords: [
+        "mobile app developer",
+        "ios development",
+        "android development",
+        "react native",
+        "performance engineering",
+    ],
+    type: "article" as const,
+    canonical: "https://neeraj-mukta.com/mobile-dev-expert",
+    jsonLd: {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        name: "Mobile Development Expert",
+        description:
+            "Cross-platform product engineering services for iOS, Android, and web with offline-first architecture and high-performance UX.",
+        provider: {
+            "@type": "Person",
+            name: "Neeraj Mukta",
+        },
+        areaServed: "Global",
+    },
+};
+---
+
+<BaseLayout {...seo}>
+    <Fragment slot="head">
+        <link
+            href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
+            rel="stylesheet"
+        />
+    </Fragment>
+    <MobileNavbar />
+    <MobileContent />
+    <MobileEnhancements />
+</BaseLayout>

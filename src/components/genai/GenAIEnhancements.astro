@@ -1,0 +1,106 @@
+<script>
+    const genaiRevealItems = Array.from(
+        document.querySelectorAll<HTMLElement>("[data-genai-reveal]"),
+    );
+    const counters = Array.from(
+        document.querySelectorAll<HTMLElement>("[data-genai-counter]"),
+    );
+    const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    function revealGenAISections() {
+        if (prefersReducedMotion) {
+            genaiRevealItems.forEach((item) =>
+                item.classList.add("is-visible"),
+            );
+            return;
+        }
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("is-visible");
+                        observer.unobserve(entry.target);
+                    }
+                });
+            },
+            { threshold: 0.15 },
+        );
+
+        genaiRevealItems.forEach((item) => observer.observe(item));
+    }
+
+    function animateGenAICounters() {
+        if (prefersReducedMotion) {
+            counters.forEach((node) => {
+                if (node instanceof HTMLElement) {
+                    node.textContent = `${node.dataset.genaiCounter}${node.dataset.suffix ?? ""}`;
+                }
+            });
+            return;
+        }
+
+        const counterObserver = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (!entry.isIntersecting) {
+                        return;
+                    }
+
+                    const node = entry.target;
+                    if (!(node instanceof HTMLElement)) {
+                        return;
+                    }
+
+                    const target = Number(node.dataset.genaiCounter ?? "0");
+                    const suffix = node.dataset.suffix ?? "";
+                    const start = performance.now();
+                    const duration = 1400;
+
+                    function step() {
+                        const progress = Math.min(
+                            (performance.now() - start) / duration,
+                            1,
+                        );
+                        const eased = 1 - Math.pow(1 - progress, 3);
+                        const current = target * eased;
+                        node.textContent = `${Math.round(current)}${suffix}`;
+
+                        if (progress < 1) {
+                            requestAnimationFrame(step);
+                        }
+                    }
+
+                    requestAnimationFrame(step);
+                    counterObserver.unobserve(node);
+                });
+            },
+            { threshold: 0.25 },
+        );
+
+        counters.forEach((node) => counterObserver.observe(node));
+    }
+
+    // Micro-interaction: Halo follow for Gen AI feel
+    function initGenAIMicroInteractions() {
+        if (prefersReducedMotion) return;
+
+        const container = document.querySelector<HTMLElement>(".genai-page");
+        if (!container) return;
+
+        container.addEventListener("mousemove", (e: MouseEvent) => {
+            const { clientX, clientY } = e;
+            const x = (clientX / window.innerWidth - 0.5) * 20;
+            const y = (clientY / window.innerHeight - 0.5) * 20;
+
+            document.documentElement.style.setProperty("--mouse-x", `${x}px`);
+            document.documentElement.style.setProperty("--mouse-y", `${y}px`);
+        });
+    }
+
+    revealGenAISections();
+    animateGenAICounters();
+    initGenAIMicroInteractions();
+</script>

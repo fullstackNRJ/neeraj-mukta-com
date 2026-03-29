@@ -1,0 +1,42 @@
+---
+import { getCollection } from "astro:content";
+import BackgroundEffects from "../../components/layout/BackgroundEffects.astro";
+import Footer from "../../components/layout/Footer.astro";
+import Navbar from "../../components/layout/Navbar.astro";
+import BlogContent from "../../components/blog/BlogContent.astro";
+import BlogEnhancements from "../../components/blog/BlogEnhancements.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const posts = await getCollection("blog", ({ data }) => !data.draft);
+
+const seo = {
+    title: "Blog Library | Neeraj Mukta",
+    description:
+        "Long-form essays on product engineering, AI systems, and digital philosophy by Neeraj Mukta.",
+    keywords: [
+        "engineering blog",
+        "technical essays",
+        "ai essays",
+        "product engineering",
+        "digital philosophy",
+    ],
+    type: "article" as const,
+    canonical: "https://neeraj-mukta.com/blog",
+    jsonLd: {
+        "@context": "https://schema.org",
+        "@type": "Blog",
+        name: "Neeraj Mukta Blog Library",
+        description:
+            "A curated library of essays across technology, AI, and philosophy.",
+        url: "https://neeraj-mukta.com/blog",
+    },
+};
+---
+
+<BaseLayout {...seo}>
+    <BackgroundEffects />
+    <Navbar />
+    <BlogContent posts={posts} />
+    <Footer />
+    <BlogEnhancements />
+</BaseLayout>

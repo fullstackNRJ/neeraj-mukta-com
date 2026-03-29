@@ -1,0 +1,848 @@
+.genai-page {
+    --genai-primary: #1a1f3a;
+    --genai-primary-container: #2d3561;
+    --genai-surface: #0f1219;
+    --genai-surface-low: #1a202c;
+    --genai-surface-lowest: #252d42;
+    --genai-surface-high: #3a4456;
+    --genai-surface-highest: #4a5568;
+    --genai-secondary-container: #5b21b6;
+    --genai-on-secondary-container: #e9d5ff;
+    --genai-on-primary-container: #cbd5e1;
+    --genai-accent: #a78bfa;
+    --genai-outline: rgba(203, 213, 225, 0.08);
+    --genai-outline-strong: rgba(203, 213, 225, 0.15);
+    --genai-on-surface: #f1f5f9;
+    --genai-on-surface-variant: #cbd5e1;
+    background: var(--genai-surface);
+    color: var(--genai-on-surface);
+    font-family: "Inter", sans-serif;
+    padding: 7.75rem 0 0;
+}
+
+.genai-shell {
+    width: min(100% - 2rem, 1280px);
+    margin: 0 auto;
+}
+
+.genai-nav-shell {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    padding: 1rem 1.25rem;
+    background: color-mix(in srgb, #0f1219 85%, transparent);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    box-shadow: 0 1px 0 rgba(123, 113, 127, 0.06);
+}
+
+.genai-nav {
+    width: min(100%, 1280px);
+    margin: 0 auto;
+    min-height: 4.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+}
+
+.genai-nav-brand {
+    color: #fafbfb;
+    text-decoration: none;
+    font-size: 1.25rem;
+    font-weight: 800;
+    letter-spacing: -0.045em;
+    background: linear-gradient(135deg, var(--genai-accent), #60a5fa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.genai-nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.genai-nav-links a,
+.genai-footer-links a {
+    color: rgba(241, 245, 249, 0.64);
+    text-decoration: none;
+    font-size: 0.98rem;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    transition: color 200ms ease;
+}
+
+.genai-nav-links a:hover,
+.genai-footer-links a:hover {
+    color: var(--genai-accent);
+}
+
+.genai-nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.genai-nav-link-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    color: var(--genai-accent);
+    text-decoration: none;
+    border-radius: 999px;
+    transition: background-color 200ms ease;
+}
+
+.genai-nav-link-icon:hover {
+    background-color: rgba(167, 139, 250, 0.1);
+}
+
+.genai-nav-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.9rem;
+    padding: 0 1.5rem;
+    background: linear-gradient(135deg, var(--genai-accent), #60a5fa);
+    color: #0f1219;
+    font-size: 0.92rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    border-radius: 0.85rem;
+    text-decoration: none;
+    transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.genai-nav-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(167, 139, 250, 0.3);
+}
+
+/* Hero Section */
+.genai-hero {
+    padding: 2.25rem 0 5.5rem;
+}
+
+.genai-hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 8fr) minmax(280px, 4fr);
+    gap: 3rem;
+    align-items: end;
+}
+
+.genai-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.45rem 0.9rem;
+    margin-bottom: 1.5rem;
+    border-radius: 999px;
+    background: rgba(167, 139, 250, 0.12);
+    color: var(--genai-accent);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    border: 1px solid rgba(167, 139, 250, 0.2);
+}
+
+.badge-dot {
+    width: 0.375rem;
+    height: 0.375rem;
+    border-radius: 999px;
+    background: var(--genai-accent);
+    animation: statusPulse 1800ms ease-in-out infinite;
+}
+
+.genai-headline {
+    margin: 0 0 1.75rem;
+    max-width: 14ch;
+    color: var(--genai-on-surface);
+    font-size: clamp(3.75rem, 8vw, 7rem);
+    font-weight: 900;
+    line-height: 0.9;
+    letter-spacing: -0.07em;
+    text-wrap: balance;
+}
+
+.genai-accent {
+    background: linear-gradient(135deg, var(--genai-accent), #60a5fa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.genai-subtext {
+    max-width: 34rem;
+    margin: 0 0 2rem;
+    color: var(--genai-on-surface-variant);
+    font-size: 1.25rem;
+    line-height: 1.75;
+    letter-spacing: -0.015em;
+}
+
+.genai-cta-group {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.genai-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.85rem;
+    text-decoration: none;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    cursor: pointer;
+    border: none;
+    transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.genai-btn-primary {
+    padding: 0.9rem 2rem;
+    background: linear-gradient(135deg, var(--genai-accent), #60a5fa);
+    color: var(--genai-surface);
+    font-size: 0.95rem;
+}
+
+.genai-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(167, 139, 250, 0.3);
+}
+
+.genai-btn-secondary {
+    padding: 0.9rem 2rem;
+    background: rgba(167, 139, 250, 0.1);
+    color: var(--genai-accent);
+    font-size: 0.95rem;
+    border: 1px solid rgba(167, 139, 250, 0.3);
+}
+
+.genai-btn-secondary:hover {
+    background: rgba(167, 139, 250, 0.15);
+    border-color: rgba(167, 139, 250, 0.5);
+}
+
+.genai-btn-large {
+    padding: 1rem 2.5rem;
+    font-size: 1rem;
+}
+
+.genai-hero-visual {
+    display: flex;
+    alignment-items: center;
+    justify-content: center;
+}
+
+.genai-visual-card {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    border-radius: 1.5rem;
+    background: linear-gradient(135deg, rgba(167, 139, 250, 0.15), rgba(96, 165, 250, 0.05));
+    border: 1px solid rgba(167, 139, 250, 0.2);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.genai-visual-placeholder {
+    font-size: 6rem;
+    color: rgba(167, 139, 250, 0.4);
+}
+
+/* Marquee Section */
+.genai-marquee {
+    margin: 0 0 7rem;
+    overflow: hidden;
+    padding: 2.6rem 0;
+    background: rgba(167, 139, 250, 0.05);
+    border-top: 1px solid rgba(167, 139, 250, 0.1);
+    border-bottom: 1px solid rgba(167, 139, 250, 0.1);
+}
+
+.genai-marquee-track {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+    width: max-content;
+    white-space: nowrap;
+    opacity: 0.5;
+    filter: grayscale(0.6);
+    animation: stripScroll 30s linear infinite;
+    will-change: transform;
+}
+
+.genai-marquee:hover .genai-marquee-track {
+    filter: grayscale(0);
+    opacity: 1;
+}
+
+.genai-marquee-word {
+    color: var(--genai-accent);
+    font-size: clamp(2.15rem, 4vw, 3rem);
+    font-weight: 900;
+    letter-spacing: -0.05em;
+}
+
+.genai-marquee-separator {
+    color: rgba(167, 139, 250, 0.6);
+    font-size: 1.45rem;
+}
+
+/* Section Headers */
+.genai-section-header {
+    margin-bottom: 2.75rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.genai-section-title {
+    margin: 0;
+    color: var(--genai-on-surface);
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+}
+
+.genai-section-desc {
+    margin: 0;
+    max-width: 36rem;
+    color: var(--genai-on-surface-variant);
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.genai-portfolio-nav {
+    flex: none;
+}
+
+.genai-view-link {
+    color: var(--genai-accent);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: opacity 200ms ease;
+}
+
+.genai-view-link:hover {
+    opacity: 0.8;
+}
+
+/* Capabilities/Components Section */
+.genai-capabilities {
+    padding-bottom: 7rem;
+}
+
+.genai-components-grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 1.5rem;
+}
+
+.genai-component-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+    padding: 2rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(167, 139, 250, 0.15);
+    background: rgba(167, 139, 250, 0.03);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    transition: transform 280ms ease, box-shadow 280ms ease, background 280ms ease, border-color 280ms ease;
+    grid-column: span 6;
+}
+
+.genai-component-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 20px 40px rgba(167, 139, 250, 0.15);
+    border-color: rgba(167, 139, 250, 0.3);
+    background: rgba(167, 139, 250, 0.08);
+}
+
+.genai-component-card-wide {
+    grid-column: span 12;
+}
+
+.genai-component-card-dark {
+    background: rgba(45, 53, 97, 0.5);
+    border-color: rgba(167, 139, 250, 0.1);
+}
+
+.genai-component-card-dark:hover {
+    background: rgba(45, 53, 97, 0.7);
+}
+
+.genai-component-card-highlight {
+    background: linear-gradient(135deg, rgba(167, 139, 250, 0.15), rgba(96, 165, 250, 0.08));
+    border-color: rgba(167, 139, 250, 0.25);
+}
+
+.genai-component-card-secondary {
+    background: linear-gradient(135deg, rgba(91, 33, 182, 0.1), rgba(96, 165, 250, 0.05));
+    border-color: rgba(91, 33, 182, 0.2);
+}
+
+.genai-card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.genai-icon-surface {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.75rem;
+    background: rgba(167, 139, 250, 0.15);
+    color: var(--genai-accent);
+    flex: none;
+}
+
+.genai-card-label {
+    color: rgba(203, 213, 225, 0.6);
+    font-size: 0.84rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-top: 0.25rem;
+}
+
+.genai-component-card h3 {
+    margin: 0 0 0.9rem;
+    color: var(--genai-on-surface);
+    font-size: 1.75rem;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+}
+
+.genai-component-card p {
+    margin: 0;
+    color: var(--genai-on-surface-variant);
+    font-size: 1rem;
+    line-height: 1.75;
+}
+
+.genai-card-content {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(200px, 1fr);
+    gap: 2rem;
+    align-items: center;
+}
+
+.genai-tech-tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.tech-tag {
+    display: inline-block;
+    padding: 0.4rem 0.85rem;
+    border-radius: 0.5rem;
+    background: rgba(167, 139, 250, 0.15);
+    color: var(--genai-accent);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+/* Portfolio Section */
+.genai-portfolio {
+    padding-bottom: 7rem;
+}
+
+.genai-portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2rem;
+}
+
+.genai-portfolio-item {
+    display: flex;
+    flex-direction: column;
+    gap: 1.3rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(167, 139, 250, 0.1);
+    transition: opacity 280ms ease;
+}
+
+.genai-portfolio-item:hover {
+    opacity: 0.8;
+}
+
+.genai-portfolio-visual {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 1rem;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.genai-portfolio-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1rem;
+    border: 1px solid rgba(167, 139, 250, 0.2);
+    background: linear-gradient(135deg, rgba(167, 139, 250, 0.1), rgba(96, 165, 250, 0.05));
+    font-size: 3.5rem;
+    color: rgba(167, 139, 250, 0.3);
+}
+
+.genai-portfolio-placeholder-1 {
+    background: linear-gradient(135deg, rgba(167, 139, 250, 0.15), rgba(96, 165, 250, 0.08));
+}
+
+.genai-portfolio-placeholder-2 {
+    background: linear-gradient(135deg, rgba(91, 33, 182, 0.12), rgba(139, 92, 246, 0.08));
+}
+
+.genai-portfolio-title {
+    margin: 0;
+    color: var(--genai-on-surface);
+    font-size: 1.4rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+}
+
+.genai-portfolio-desc {
+    margin: 0;
+    color: var(--genai-on-surface-variant);
+    font-size: 0.95rem;
+}
+
+/* Technical Library */
+.genai-library {
+    padding-bottom: 7rem;
+}
+
+.genai-library-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2rem;
+}
+
+.genai-library-entry {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+    padding: 2rem;
+    border-radius: 1rem;
+    background: rgba(167, 139, 250, 0.05);
+    border: 1px solid rgba(167, 139, 250, 0.15);
+    transition: transform 280ms ease, background 280ms ease;
+}
+
+.genai-library-entry:hover {
+    transform: translateY(-2px);
+    background: rgba(167, 139, 250, 0.1);
+}
+
+.genai-library-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.genai-library-entry h3 {
+    margin: 0;
+    color: var(--genai-on-surface);
+    font-size: 1.3rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+}
+
+.genai-library-entry p {
+    margin: 0;
+    color: var(--genai-on-surface-variant);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.genai-status-badge {
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.35rem 0.75rem;
+    border-radius: 0.4rem;
+    background: rgba(74, 222, 128, 0.15);
+    color: #4ade80;
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.genai-status-beta {
+    background: rgba(167, 139, 250, 0.15);
+    color: var(--genai-accent);
+}
+
+.genai-library-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(167, 139, 250, 0.1);
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.stat-label {
+    color: rgba(203, 213, 225, 0.6);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.stat-value {
+    color: var(--genai-accent);
+    font-size: 1.2rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+}
+
+/* CTA Section */
+.genai-cta-section {
+    padding: 5.5rem 0 5.5rem;
+    margin-top: 7rem;
+}
+
+.genai-cta-content {
+    position: relative;
+    overflow: hidden;
+    padding: 4.75rem 2rem;
+    border-radius: 2rem;
+    text-align: center;
+    background: linear-gradient(135deg, rgba(167, 139, 250, 0.1), rgba(96, 165, 250, 0.05));
+    border: 1px solid rgba(167, 139, 250, 0.2);
+}
+
+.genai-cta-headline {
+    margin: 0 0 1.4rem;
+    color: var(--genai-on-surface);
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.05em;
+}
+
+.genai-cta-subtext {
+    max-width: 42rem;
+    margin: 0 auto 2.4rem;
+    color: var(--genai-on-surface-variant);
+    font-size: 1.12rem;
+    line-height: 1.75;
+}
+
+/* Footer */
+.genai-footer {
+    border-top: 1px solid rgba(167, 139, 250, 0.1);
+    background: color-mix(in srgb, #1a202c 95%, #0f1219);
+}
+
+.genai-footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: 3rem 0;
+    flex-wrap: wrap;
+}
+
+.genai-footer-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.genai-footer-brand {
+    background: linear-gradient(135deg, var(--genai-accent), #60a5fa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: 1.05rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+}
+
+.genai-footer-copy p {
+    margin: 0;
+    color: rgba(203, 213, 225, 0.56);
+    font-size: 0.82rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.genai-footer-links {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+/* Animations and Reveal Effects */
+[data-genai-reveal] {
+    opacity: 0;
+    transform: translate3d(0, 28px, 0);
+    transition: opacity 820ms ease, transform 820ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+[data-genai-reveal='left'] {
+    transform: translate3d(-34px, 0, 0);
+}
+
+[data-genai-reveal].is-visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    transition-delay: calc(var(--stagger, 0) * 110ms);
+}
+
+@keyframes statusPulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.4;
+    }
+}
+
+@keyframes stripScroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(calc(-100% / 2));
+    }
+}
+
+/* Responsive */
+@media (max-width: 1100px) {
+
+    .genai-hero-grid,
+    .genai-components-grid,
+    .genai-library-grid,
+    .genai-portfolio-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .genai-component-card,
+    .genai-component-card-wide {
+        grid-column: span 1 !important;
+    }
+
+    .genai-section-header {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .genai-page {
+        padding: 6rem 0 0;
+    }
+
+    .genai-nav-shell {
+        padding: 0.75rem 1rem;
+    }
+
+    .genai-nav {
+        min-height: 3.5rem;
+    }
+
+    .genai-nav-links {
+        gap: 1.2rem;
+        font-size: 0.9rem;
+    }
+
+    .genai-hero {
+        padding: 1.5rem 0 3.5rem;
+    }
+
+    .genai-headline {
+        font-size: clamp(2.8rem, 6vw, 3.5rem);
+    }
+
+    .genai-subtext,
+    .genai-cta-subtext {
+        font-size: 1rem;
+    }
+
+    .genai-section-header {
+        margin-bottom: 1.75rem;
+    }
+
+    .genai-cta-content {
+        padding: 3rem 1.5rem;
+    }
+
+    .genai-cta-headline {
+        font-size: clamp(2rem, 4vw, 3rem);
+    }
+
+    .genai-footer-inner {
+        padding: 2rem 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    [data-genai-reveal] {
+        transition: none;
+    }
+
+    [data-genai-reveal].is-visible {
+        transition-delay: 0;
+    }
+
+    .genai-marquee-track {
+        animation: none;
+    }
+
+    .badge-dot {
+        animation: none;
+    }
+
+    .genai-component-card,
+    .genai-library-entry,
+    .genai-portfolio-item {
+        transition: none;
+    }
+}

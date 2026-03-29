@@ -1,0 +1,45 @@
+---
+import MasteryContent from "../components/mastery/MasteryContent.astro";
+import MasteryEnhancements from "../components/mastery/MasteryEnhancements.astro";
+import MasteryNavbar from "../components/mastery/MasteryNavbar.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const seo = {
+    title: "JavaScript & TypeScript Mastery | Neeraj Mukta",
+    description:
+        "Scalable JavaScript and TypeScript architecture across edge-ready backends, modern frameworks, and enterprise-grade frontends.",
+    keywords: [
+        "javascript architect",
+        "typescript architect",
+        "react architecture",
+        "edge runtime",
+        "scalable frontend",
+    ],
+    type: "article" as const,
+    canonical: "https://neeraj-mukta.com/javascript-typescript-mastery",
+    jsonLd: {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        name: "JavaScript and TypeScript Mastery",
+        description:
+            "Architecture and execution for high-performance JavaScript and TypeScript applications in startups and enterprise systems.",
+        provider: {
+            "@type": "Person",
+            name: "Neeraj Mukta",
+        },
+        areaServed: "Global",
+    },
+};
+---
+
+<BaseLayout {...seo}>
+    <Fragment slot="head">
+        <link
+            href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap"
+            rel="stylesheet"
+        />
+    </Fragment>
+    <MasteryNavbar />
+    <MasteryContent />
+    <MasteryEnhancements />
+</BaseLayout>

@@ -1,0 +1,46 @@
+<script>
+    const blogRoot = document.querySelector("[data-blog-root]");
+    const blogViewToggle = document.querySelector("#blogViewToggle");
+    const footerThemeToggle = document.querySelector("#themeToggle");
+
+    function applyBlogView(mode: "normal" | "folder") {
+        if (!(blogRoot instanceof HTMLElement)) {
+            return;
+        }
+
+        blogRoot.dataset.blogView = mode;
+
+        if (!(blogViewToggle instanceof HTMLButtonElement)) {
+            return;
+        }
+
+        const isFolderMode = mode === "folder";
+        blogViewToggle.setAttribute("aria-checked", String(isFolderMode));
+        blogViewToggle.setAttribute(
+            "aria-label",
+            isFolderMode ? "Switch to normal view" : "Enable folder view",
+        );
+    }
+
+    if (blogViewToggle instanceof HTMLButtonElement) {
+        blogViewToggle.addEventListener("click", () => {
+            if (!(blogRoot instanceof HTMLElement)) {
+                return;
+            }
+
+            const nextMode =
+                blogRoot.dataset.blogView === "folder" ? "normal" : "folder";
+            applyBlogView(nextMode);
+        });
+    }
+
+    if (footerThemeToggle instanceof HTMLButtonElement) {
+        footerThemeToggle.addEventListener("click", () => {
+            const nextTheme =
+                document.body.dataset.theme === "light" ? "dark" : "light";
+            document.body.dataset.theme = nextTheme;
+        });
+    }
+
+    applyBlogView("normal");
+</script>

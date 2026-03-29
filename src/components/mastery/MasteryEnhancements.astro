@@ -1,14 +1,14 @@
 <script>
     const revealItems = Array.from(
-        document.querySelectorAll("[data-growth-reveal]"),
+        document.querySelectorAll("[data-mastery-reveal]"),
     );
-    const toggle = document.querySelector("#growthThemeToggle");
-    const prefersReducedMotion = window.matchMedia(
+    const toggle = document.querySelector("#masteryThemeToggle");
+    const reducedMotion = window.matchMedia(
         "(prefers-reduced-motion: reduce)",
     ).matches;
 
-    function revealSections() {
-        if (prefersReducedMotion) {
+    function revealOnScroll() {
+        if (reducedMotion) {
             revealItems.forEach((item) => item.classList.add("is-visible"));
             return;
         }
@@ -24,7 +24,7 @@
                     observer.unobserve(entry.target);
                 });
             },
-            { threshold: 0.16 },
+            { threshold: 0.18 },
         );
 
         revealItems.forEach((item) => observer.observe(item));
@@ -36,20 +36,13 @@
         }
 
         toggle.addEventListener("click", () => {
-            const current = document.body.dataset.theme;
-            const next = current === "light" ? "dark" : "light";
-
+            const next =
+                document.body.dataset.theme === "light" ? "dark" : "light";
             document.body.dataset.theme = next;
             toggle.classList.toggle("is-light", next === "light");
-            const label = toggle.querySelector(".toggle-label");
-
-            if (label) {
-                label.textContent =
-                    next === "light" ? "Mode: Light" : "Mode: Dark";
-            }
         });
     }
 
-    revealSections();
+    revealOnScroll();
     initThemeToggle();
 </script>

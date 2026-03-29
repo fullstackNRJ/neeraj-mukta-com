@@ -1,0 +1,49 @@
+---
+import GenAIContent from "../components/genai/GenAIContent.astro";
+import GenAIEnhancements from "../components/genai/GenAIEnhancements.astro";
+import GenAINavbar from "../components/genai/GenAINavbar.astro";
+import GenAIFooter from "../components/genai/GenAIFooter.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const seo = {
+    title: "Gen AI Solutions | Studio Cobalt | Neeraj Mukta",
+    description:
+        "Applied Gen AI systems for teams shipping copilots, retrieval pipelines, multi-agent workflows, and production-grade automation.",
+    keywords: [
+        "generative AI",
+        "LLM solutions",
+        "AI agents",
+        "RAG architecture",
+        "production AI systems",
+        "workflow automation",
+        "evaluation pipelines",
+    ],
+    type: "article" as const,
+    canonical: "https://neeraj-mukta.com/gen-ai-solutions",
+    jsonLd: {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        name: "Gen AI Solutions",
+        description:
+            "Applied Gen AI delivery spanning copilots, agent systems, retrieval architecture, evaluation workflows, and automation for production teams.",
+        provider: {
+            "@type": "Person",
+            name: "Neeraj Mukta",
+        },
+        areaServed: "Global",
+    },
+};
+---
+
+<BaseLayout {...seo}>
+    <Fragment slot="head">
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+        />
+    </Fragment>
+    <GenAINavbar />
+    <GenAIContent />
+    <GenAIFooter />
+    <GenAIEnhancements />
+</BaseLayout>

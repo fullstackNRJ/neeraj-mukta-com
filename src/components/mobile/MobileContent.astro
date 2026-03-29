@@ -1,0 +1,240 @@
+---
+import "../../styles/pages/mobile-dev-expert.css";
+---
+
+<main class="mde-page" id="work">
+    <section class="mde-shell mde-hero" id="hero">
+        <div class="mde-hero-copy" data-mde-reveal style="--stagger: 0;">
+            <p class="mde-kicker">Digital Craftsmanship</p>
+            <h1 class="mde-headline">
+                <span>One Codebase.</span>
+                <span>3 Platforms.</span>
+            </h1>
+            <p class="mde-hero-text">
+                High-fidelity cross platform apps on iOS, Android, and Web.
+                Engineered for seamless performance and editorial elegance.
+            </p>
+            <div class="mde-hero-actions">
+                <a
+                    href="#contact"
+                    class="mde-btn mde-btn-primary interactive"
+                    data-sound="bright">Start a Project</a
+                >
+                <a
+                    href="#showcase"
+                    class="mde-btn mde-btn-secondary interactive"
+                    data-sound="soft">View Portfolio</a
+                >
+            </div>
+        </div>
+
+        <div
+            class="mde-hero-visual"
+            data-mde-reveal
+            data-parallax
+            style="--stagger: 1;"
+        >
+            <div
+                class="mde-dashboard-card"
+                aria-label="Analytics dashboard mockup"
+                role="img"
+            >
+                <div class="mde-dashboard-top">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <div class="mde-dashboard-charts">
+                    <div class="mde-chart mde-chart-left"></div>
+                    <div class="mde-chart mde-chart-right"></div>
+                </div>
+            </div>
+            <div
+                class="mde-phone-mock"
+                aria-label="Mobile app mockup"
+                role="img"
+            >
+                <div class="mde-phone-notch"></div>
+                <div class="mde-phone-screen"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="mde-shell mde-discipline" id="tools">
+        <div class="mde-section-head" data-mde-reveal style="--stagger: 0;">
+            <h2>Core Disciplines</h2>
+            <p>
+                Precision-engineered solutions for the modern web and mobile
+                landscape.
+            </p>
+        </div>
+
+        <div class="mde-discipline-grid">
+            <article
+                class="mde-card mde-card-wide"
+                data-mde-reveal
+                style="--stagger: 1;"
+            >
+                <p class="mde-card-icon">◧</p>
+                <h3>Cross Platform Supremacy</h3>
+                <p>
+                    Leveraging React Native and Capacitor to deliver
+                    native-grade experiences across iOS, Android, and Web from a
+                    single high-performance codebase.
+                </p>
+                <div class="mde-chip-row">
+                    <span>React Native</span>
+                    <span>Capacitor</span>
+                    <span>TypeScript</span>
+                </div>
+            </article>
+
+            <article
+                class="mde-card mde-card-visual"
+                data-mde-reveal
+                style="--stagger: 2;"
+            >
+                <p class="mde-card-icon">✦</p>
+                <h3>Native Polish</h3>
+                <p>
+                    Gesture-first UX, smooth transitions, and motion systems
+                    tuned for 60fps interactions that feel truly platform
+                    native.
+                </p>
+                <div class="mde-device-preview" aria-hidden="true"></div>
+            </article>
+
+            <article
+                class="mde-card mde-card-tools"
+                data-mde-reveal
+                style="--stagger: 3;"
+            >
+                <h3>Optimized For Performance</h3>
+                <p>
+                    Full stack mobile architecture with Firebase and Supabase.
+                    Real-time data sync and offline-first logic built for scale.
+                </p>
+                <div class="mde-tools-list" aria-label="Backend tools">
+                    <span>Firebase</span>
+                    <span>Supabase</span>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <section class="mde-shell mde-showcase" id="showcase">
+        <div
+            class="mde-section-head mde-section-head-centered"
+            data-mde-reveal
+            style="--stagger: 0;"
+        >
+            <h2>The Showcase</h2>
+            <p>
+                Interactive prototypes and live applications built with an
+                offline-first philosophy and intelligent notification logic.
+            </p>
+        </div>
+
+        <div class="mde-showcase-grid">
+            <article class="mde-project" data-mde-reveal style="--stagger: 1;">
+                <div class="mde-project-image mde-project-image-a"></div>
+                <h3>LuxCart Mobile</h3>
+                <p>
+                    E-commerce app with abandoned checkout recovery and edge
+                    caching.
+                </p>
+            </article>
+
+            <article class="mde-project" data-mde-reveal style="--stagger: 2;">
+                <div class="mde-project-image mde-project-image-b"></div>
+                <h3>Pulse Trading</h3>
+                <p>
+                    WebSocket charting, biometric auth, and low-latency event
+                    streams.
+                </p>
+            </article>
+
+            <article class="mde-project" data-mde-reveal style="--stagger: 3;">
+                <div class="mde-project-image mde-project-image-c"></div>
+                <h3>Nexus Social</h3>
+                <p>
+                    Dynamic feed caching with animated transitions and profile
+                    intelligence.
+                </p>
+            </article>
+        </div>
+    </section>
+
+    <section class="mde-shell mde-mindset">
+        <article class="mde-code-block" data-mde-reveal style="--stagger: 0;">
+            <pre><code>class AppArchitect &#123;
+    constructor() &#123;
+        this.stack = ['React Native', 'Supabase'];
+        this.goals = ['High Fidelity', 'Offline Ready'];
+    &#125;
+
+    async build() &#123;
+        await this.optimizePerformance();
+        return 'Product Ready';
+    &#125;
+&#125;</code></pre>
+            <h2>Developer Mindset</h2>
+            <p>
+                I do not chase shiny demos. Every app is designed for
+                maintainability, observability, and real-world usage at startup
+                speed.
+            </p>
+        </article>
+
+        <div class="mde-metrics-grid" data-mde-reveal style="--stagger: 1;">
+            <article>
+                <h3>Offline-First</h3>
+                <p>Resilient data architecture for unstable networks.</p>
+            </article>
+            <article>
+                <h3>Push Logic</h3>
+                <p>
+                    Behavior-driven notifications with strict privacy controls.
+                </p>
+            </article>
+            <article>
+                <h3>Deep Metrics</h3>
+                <p>Telemetry loops that improve performance after launch.</p>
+            </article>
+            <article>
+                <h3>Hardened Security</h3>
+                <p>
+                    Token rotation, encrypted caches, and runtime policy checks.
+                </p>
+            </article>
+        </div>
+    </section>
+
+    <section
+        class="mde-shell mde-cta"
+        id="contact"
+        data-mde-reveal
+        style="--stagger: 0;"
+    >
+        <h2>Transform Your Idea Into an App Store Success</h2>
+        <p>
+            Ready to build the next category-defining mobile experience? Let us
+            discuss your roadmap.
+        </p>
+        <a
+            href="#"
+            class="mde-btn mde-btn-primary interactive"
+            data-sound="bright">Book a Strategy Call</a
+        >
+    </section>
+
+    <footer class="mde-footer">
+        <p>Digital Curator</p>
+        <span>Build products. Ship with intentionality.</span>
+        <div class="mde-footer-links">
+            <a href="#" class="interactive" data-sound="soft">Studio</a>
+            <a href="#" class="interactive" data-sound="soft">Platform</a>
+            <a href="#" class="interactive" data-sound="soft">Layers</a>
+        </div>
+    </footer>
+</main>
