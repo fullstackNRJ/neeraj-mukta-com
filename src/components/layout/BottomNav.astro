@@ -1,0 +1,133 @@
+---
+---
+
+<nav class="bottom-nav" aria-label="Mobile navigation" id="bottom-nav">
+    <div class="bottom-nav-track">
+        <a class="bottom-nav-item" href="/" data-label="Home" aria-label="Home">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M3 12L12 4l9 8M5 10v9a1 1 0 001 1h4v-5h4v5h4a1 1 0 001-1v-9" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>Home</span>
+        </a>
+        <a class="bottom-nav-item" href="/startup-founder" data-label="Founder" aria-label="Startup Founder">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>Founder</span>
+        </a>
+        <a class="bottom-nav-item" href="/recruiter" data-label="Recruiter" aria-label="Recruiter">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.7"/>
+                <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+            </svg>
+            <span>Recruiter</span>
+        </a>
+        <a class="bottom-nav-item" href="/for-agencies" data-label="Agency" aria-label="Agency Partner">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <rect x="2" y="7" width="20" height="14" rx="2" stroke="currentColor" stroke-width="1.7"/>
+                <path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+            </svg>
+            <span>Agency</span>
+        </a>
+        <a class="bottom-nav-item" href="/for-marketing" data-label="Growth" aria-label="Growth Engineering">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M3 17l5-5 4 4 9-9" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>Growth</span>
+        </a>
+        <a class="bottom-nav-item" href="/journal" data-label="Journal" aria-label="Journal">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M4 19.5A2.5 2.5 0 016.5 17H20" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+                <path d="M4 4.5A2.5 2.5 0 016.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15z" stroke="currentColor" stroke-width="1.7"/>
+            </svg>
+            <span>Journal</span>
+        </a>
+        <a class="bottom-nav-item" href="/contact" data-label="Contact" aria-label="Contact">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2v10z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+            </svg>
+            <span>Contact</span>
+        </a>
+    </div>
+</nav>
+
+<style>
+    .bottom-nav {
+        display: none;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 50;
+        background: color-mix(in srgb, var(--surface-container-highest) 92%, transparent);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-top: 1px solid var(--outline-ghost);
+        padding: 0 0 env(safe-area-inset-bottom, 0);
+    }
+
+    .bottom-nav-track {
+        display: flex;
+        overflow-x: auto;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+        gap: 0;
+        padding: 0 0.25rem;
+    }
+
+    .bottom-nav-track::-webkit-scrollbar {
+        display: none;
+    }
+
+    .bottom-nav-item {
+        flex: 0 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.25rem;
+        padding: 0.6rem 0.9rem;
+        min-width: 4rem;
+        text-decoration: none;
+        color: var(--on-surface-variant);
+        transition: color 200ms ease;
+        font-size: 0.6rem;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        font-weight: 600;
+    }
+
+    .bottom-nav-item svg {
+        width: 1.35rem;
+        height: 1.35rem;
+        flex-shrink: 0;
+    }
+
+    .bottom-nav-item:hover,
+    .bottom-nav-item[aria-current="page"] {
+        color: var(--primary);
+    }
+
+    @media (max-width: 768px) {
+        .bottom-nav {
+            display: block;
+        }
+
+        /* Ensure page content doesn't hide behind the bottom nav */
+        body {
+            padding-bottom: 4.5rem;
+        }
+    }
+</style>
+
+<script>
+    // Mark active nav item based on current pathname
+    const path = window.location.pathname;
+    document.querySelectorAll(".bottom-nav-item").forEach((link) => {
+        const href = link.getAttribute("href") ?? "";
+        const isActive = href === "/" ? path === "/" : path.startsWith(href);
+        if (isActive) {
+            link.setAttribute("aria-current", "page");
+        }
+    });
+</script>

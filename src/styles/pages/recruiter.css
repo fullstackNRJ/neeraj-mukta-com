@@ -131,7 +131,7 @@
 
 .status-value {
     font-size: 0.7rem;
-    font-weight: 650;
+    font-weight: 600;
     color: var(--on-surface);
     line-height: 1;
 }
@@ -345,7 +345,7 @@ body[data-theme='light'] .btn-hire {
     align-self: flex-start;
     padding: 0.2rem 0.56rem;
     font-size: 0.63rem;
-    font-weight: 650;
+    font-weight: 600;
     letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--on-surface-variant);
@@ -377,7 +377,7 @@ body[data-theme='light'] .btn-hire {
 .outcome-value {
     display: block;
     font-size: 1.08rem;
-    font-weight: 750;
+    font-weight: 700;
     color: var(--on-surface);
     text-align: right;
     line-height: 1.25;

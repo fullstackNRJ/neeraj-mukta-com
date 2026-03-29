@@ -1,0 +1,61 @@
+---
+export const prerender = true;
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navbar from "../components/layout/Navbar.astro";
+import Footer from "../components/layout/Footer.astro";
+import BackgroundEffects from "../components/layout/BackgroundEffects.astro";
+import PageEnhancements from "../components/layout/PageEnhancements.astro";
+import BottomNav from "../components/layout/BottomNav.astro";
+
+const seo = {
+    title: "Contact | Neeraj Mukta",
+    description:
+        "Get in touch with Neeraj Mukta for product engineering, MVP development, agency collaboration, or growth consulting.",
+    keywords: ["contact", "hire", "neeraj mukta", "freelance engineer"],
+};
+---
+
+<BaseLayout {...seo}>
+    <BackgroundEffects />
+    <Navbar />
+    <main class="layout contact-page" id="main-content">
+        <section class="contact-hero">
+            <p class="label">Get In Touch</p>
+            <h1 class="headline">Let's Build Something.</h1>
+            <p class="contact-body">
+                Have a project in mind? I'd love to hear about it. Reach out
+                via email and I'll get back to you within 24 hours.
+            </p>
+            <a
+                class="btn btn-primary interactive"
+                href="mailto:admin@neerajmukta.com"
+                data-sound="bright"
+            >
+                admin@neerajmukta.com
+            </a>
+        </section>
+    </main>
+    <Footer />
+    <BottomNav />
+    <PageEnhancements />
+</BaseLayout>
+
+<style>
+    .contact-page {
+        min-height: 70vh;
+        display: flex;
+        align-items: center;
+    }
+
+    .contact-hero {
+        padding-top: var(--spacing-16);
+        max-width: 42ch;
+    }
+
+    .contact-body {
+        margin: 1rem 0 1.75rem;
+        color: var(--on-surface-variant);
+        font-size: 1.05rem;
+        line-height: 1.7;
+    }
+</style>

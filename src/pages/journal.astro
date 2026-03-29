@@ -1,0 +1,60 @@
+---
+export const prerender = true;
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navbar from "../components/layout/Navbar.astro";
+import Footer from "../components/layout/Footer.astro";
+import BackgroundEffects from "../components/layout/BackgroundEffects.astro";
+import PageEnhancements from "../components/layout/PageEnhancements.astro";
+import BottomNav from "../components/layout/BottomNav.astro";
+
+const seo = {
+    title: "Journal | Neeraj Mukta",
+    description:
+        "Thoughts on product engineering, technical architecture, growth systems, and building software with intent.",
+    keywords: [
+        "journal",
+        "blog",
+        "product engineering",
+        "neeraj mukta",
+        "technical writing",
+    ],
+};
+---
+
+<BaseLayout {...seo}>
+    <BackgroundEffects />
+    <Navbar />
+    <main class="layout journal-page" id="main-content">
+        <section class="journal-hero">
+            <p class="label">Writing</p>
+            <h1 class="headline">Journal</h1>
+            <p class="journal-body">
+                Collected thoughts on shipping products, technical architecture,
+                and building with intent. Coming soon.
+            </p>
+        </section>
+    </main>
+    <Footer />
+    <BottomNav />
+    <PageEnhancements />
+</BaseLayout>
+
+<style>
+    .journal-page {
+        min-height: 70vh;
+        display: flex;
+        align-items: center;
+    }
+
+    .journal-hero {
+        padding-top: var(--spacing-16);
+        max-width: 42ch;
+    }
+
+    .journal-body {
+        margin: 1rem 0 0;
+        color: var(--on-surface-variant);
+        font-size: 1.05rem;
+        line-height: 1.7;
+    }
+</style>

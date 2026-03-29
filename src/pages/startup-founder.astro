@@ -1,7 +1,9 @@
 ---
+export const prerender = true;
 import FounderContent from "../components/founder/FounderContent.astro";
 import FounderEnhancements from "../components/founder/FounderEnhancements.astro";
 import BackgroundEffects from "../components/layout/BackgroundEffects.astro";
+import BottomNav from "../components/layout/BottomNav.astro";
 import Footer from "../components/layout/Footer.astro";
 import Navbar from "../components/layout/Navbar.astro";
 import PageEnhancements from "../components/layout/PageEnhancements.astro";
@@ -20,7 +22,6 @@ const seo = {
         "full stack development",
     ],
     type: "article" as const,
-    canonical: "https://neeraj-mukta.com/startup-founder",
     jsonLd: {
         "@context": "https://schema.org",
         "@type": "Service",
@@ -41,6 +42,7 @@ const seo = {
     <Navbar />
     <FounderContent />
     <Footer />
+    <BottomNav />
     <PageEnhancements />
     <FounderEnhancements />
 </BaseLayout>

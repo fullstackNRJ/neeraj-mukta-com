@@ -70,6 +70,13 @@
     const cards = Array.from(document.querySelectorAll(".card"));
     const halos = Array.from(document.querySelectorAll(".halo"));
     const themeToggle = document.querySelector("#themeToggle");
+    const themeToggleNav = document.querySelector("#themeToggleNav");
+    const iaToggle = document.querySelector(
+        "#iaToggle",
+    ) as HTMLButtonElement | null;
+    const iaPanel = document.querySelector(
+        "#ia-panel",
+    ) as HTMLElement | null;
     const gate = document.querySelector(
         "#welcome-gate",
     ) as HTMLDialogElement | null;
@@ -85,23 +92,35 @@
     const gateSkipBtn = document.querySelector("#gate-skip");
 
     // ── Audio ─────────────────────────────────────────────────────────────
-    const audioContext = new AudioContext();
-    audioContext.suspend();
+    let audioContext: AudioContext | null = null;
+
+    function getAudioContext(): AudioContext | null {
+        if (!audioContext) {
+            try {
+                audioContext = new AudioContext();
+            } catch {
+                return null;
+            }
+        }
+        return audioContext;
+    }
 
     function initAudioContext() {
-        if (audioContext.state === "suspended") {
-            audioContext.resume();
+        const ctx = getAudioContext();
+        if (ctx?.state === "suspended") {
+            ctx.resume();
         }
     }
 
     function playHoverSound(kind = "soft") {
-        if (!audioContext || audioContext.state !== "running") {
+        const ctx = getAudioContext();
+        if (!ctx || ctx.state !== "running") {
             return;
         }
 
-        const osc = audioContext.createOscillator();
-        const gain = audioContext.createGain();
-        const now = audioContext.currentTime;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        const now = ctx.currentTime;
 
         if (kind === "bright") {
             // Triangle wave — higher, punchy click
@@ -112,7 +131,7 @@
             gain.gain.linearRampToValueAtTime(0.04, now + 0.02);
             gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.14);
             osc.connect(gain);
-            gain.connect(audioContext.destination);
+            gain.connect(ctx.destination);
             osc.start(now);
             osc.stop(now + 0.15);
         } else if (kind === "deep") {
@@ -124,7 +143,7 @@
             gain.gain.linearRampToValueAtTime(0.055, now + 0.04);
             gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.2);
             osc.connect(gain);
-            gain.connect(audioContext.destination);
+            gain.connect(ctx.destination);
             osc.start(now);
             osc.stop(now + 0.22);
         } else if (kind === "ping") {
@@ -136,7 +155,7 @@
             gain.gain.linearRampToValueAtTime(0.032, now + 0.008);
             gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.1);
             osc.connect(gain);
-            gain.connect(audioContext.destination);
+            gain.connect(ctx.destination);
             osc.start(now);
             osc.stop(now + 0.11);
         } else {
@@ -148,7 +167,7 @@
             gain.gain.linearRampToValueAtTime(0.04, now + 0.02);
             gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.14);
             osc.connect(gain);
-            gain.connect(audioContext.destination);
+            gain.connect(ctx.destination);
             osc.start(now);
             osc.stop(now + 0.15);
         }
@@ -179,9 +198,17 @@
     function startHaloMotion() {
         halos.forEach(() => randomMoveHalo());
 
-        setInterval(() => {
+        const haloInterval = setInterval(() => {
             randomMoveHalo();
         }, 2200);
+
+        document.addEventListener(
+            "visibilitychange",
+            () => {
+                if (document.hidden) clearInterval(haloInterval);
+            },
+            { once: true },
+        );
     }
 
     // ── Cards ─────────────────────────────────────────────────────────────
@@ -232,6 +259,32 @@
         const parent = pathwaysSubtitleWords[0].parentElement;
         if (parent) {
             observer.observe(parent);
+        }
+    }
+
+    // ── Intro Typewriter ──────────────────────────────────────────────────
+    async function runIntroTypewriter() {
+        const introNode = document.querySelector<HTMLElement>("#introTypewriter");
+        if (!introNode) return;
+
+        const fullText = introNode.dataset.intro ?? "";
+        const chars = [...fullText];
+        let typed = "";
+
+        for (const [index, char] of chars.entries()) {
+            typed += char;
+            introNode.textContent = typed;
+
+            // Pause longer after sentence-ending punctuation
+            let delay = 28;
+            if (char === ".") delay = 380;
+            else if (char === ",") delay = 80;
+
+            await new Promise((resolve) => setTimeout(resolve, delay));
+
+            if (index === chars.length - 1) {
+                introNode.classList.add("intro-done");
+            }
         }
     }
 
@@ -308,6 +361,11 @@
     }
 
     // ── Interactions ──────────────────────────────────────────────────────
+    function applyTheme(next: string) {
+        document.body.setAttribute("data-theme", next);
+        localStorage.setItem("theme", next);
+    }
+
     function wireInteractions() {
         document.addEventListener("pointerdown", initAudioContext, {
             once: true,
@@ -324,18 +382,66 @@
             });
         });
 
+        // Footer theme toggle
         themeToggle?.addEventListener("click", () => {
             const next =
                 document.body.getAttribute("data-theme") === "dark"
                     ? "light"
                     : "dark";
-            document.body.setAttribute("data-theme", next);
+            applyTheme(next);
         });
+
+        // Nav theme toggle (sun/moon icon)
+        themeToggleNav?.addEventListener("click", () => {
+            const next =
+                document.body.getAttribute("data-theme") === "dark"
+                    ? "light"
+                    : "dark";
+            applyTheme(next);
+        });
+
+        // Restore persisted theme
+        const savedTheme = localStorage.getItem("theme");
+        if (savedTheme) {
+            document.body.setAttribute("data-theme", savedTheme);
+        }
+
+        // IA panel toggle
+        if (iaToggle && iaPanel) {
+            iaToggle.addEventListener("click", (e) => {
+                e.stopPropagation();
+                const isOpen = !iaPanel.hidden;
+                iaPanel.hidden = isOpen;
+                iaToggle.setAttribute(
+                    "aria-expanded",
+                    String(!isOpen),
+                );
+                if (!isOpen) {
+                    iaPanel.focus();
+                }
+            });
+
+            document.addEventListener("click", (e) => {
+                if (!iaPanel.hidden && e.target instanceof Node && !iaPanel.contains(e.target) && e.target !== iaToggle) {
+                    iaPanel.hidden = true;
+                    iaToggle.setAttribute("aria-expanded", "false");
+                }
+            });
+
+            document.addEventListener("keydown", (e) => {
+                if (e.key === "Escape" && !iaPanel.hidden) {
+                    iaPanel.hidden = true;
+                    iaToggle.setAttribute("aria-expanded", "false");
+                    iaToggle.focus();
+                }
+            });
+        }
     }
 
     // ── Welcome Gate ──────────────────────────────────────────────────────
     let gateA = 0;
     let gateB = 0;
+    let elementBeforeGate: HTMLElement | null = null;
 
     function generateChallenge() {
         gateA = Math.floor(Math.random() * 9) + 1;
@@ -348,6 +454,11 @@
         if (!gate) {
             return;
         }
+
+        elementBeforeGate =
+            document.activeElement instanceof HTMLElement
+                ? document.activeElement
+                : null;
 
         generateChallenge();
         gate.showModal();
@@ -365,6 +476,11 @@
         }
 
         gate.close();
+
+        const returnFocus =
+            elementBeforeGate ??
+            document.querySelector<HTMLElement>("main h1, main, body");
+        returnFocus?.focus();
 
         if (withSound) {
             initAudioContext();
@@ -417,11 +533,26 @@
     wireInteractions();
     watchPathwaysSubtitle();
 
+    const alreadyAnimated = sessionStorage.getItem("home-animated");
+
     setTimeout(async () => {
-        await runTypewriter();
-        await revealBentoSubtitle();
-        revealCards();
-    }, 1650);
+        if (alreadyAnimated) {
+            // Skip animations on revisit — just show everything
+            if (typeNode) typeNode.classList.add("done");
+            const introNode = document.querySelector<HTMLElement>("#introTypewriter");
+            if (introNode) {
+                introNode.textContent = introNode.dataset.intro ?? "";
+                introNode.classList.add("intro-done");
+            }
+            bentoSubtitleWords.forEach((w) => w.classList.add("is-visible"));
+            cards.forEach((c) => c.classList.add("is-visible"));
+        } else {
+            sessionStorage.setItem("home-animated", "1");
+            await runTypewriter();
+            await Promise.all([runIntroTypewriter(), revealBentoSubtitle()]);
+            revealCards();
+        }
+    }, 400);
 
     if (!sessionStorage.getItem("gate-passed")) {
         setTimeout(openGate, 900);
