@@ -537,8 +537,20 @@
 
     setTimeout(async () => {
         if (alreadyAnimated) {
-            // Skip animations on revisit — just show everything
-            if (typeNode) typeNode.classList.add("done");
+            // Skip animations on revisit — restore full content immediately
+            if (typeNode) {
+                const fullText = typeNode.getAttribute("data-fulltext") ?? "";
+                const accentStart = parseInt(
+                    typeNode.getAttribute("data-accent-start") ?? "-1",
+                    10,
+                );
+                const accentEnd = parseInt(
+                    typeNode.getAttribute("data-accent-end") ?? "-1",
+                    10,
+                );
+                buildHeadlineDOM(fullText, accentStart, accentEnd);
+                typeNode.classList.add("done");
+            }
             const introNode = document.querySelector<HTMLElement>("#introTypewriter");
             if (introNode) {
                 introNode.textContent = introNode.dataset.intro ?? "";
@@ -548,8 +560,10 @@
             cards.forEach((c) => c.classList.add("is-visible"));
         } else {
             sessionStorage.setItem("home-animated", "1");
+            // Sequential: headline → intro bio → bento subtitle → cards
             await runTypewriter();
-            await Promise.all([runIntroTypewriter(), revealBentoSubtitle()]);
+            await runIntroTypewriter();
+            await revealBentoSubtitle();
             revealCards();
         }
     }, 400);
