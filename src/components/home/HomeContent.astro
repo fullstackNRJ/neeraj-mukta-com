@@ -2,10 +2,13 @@
 import "../../styles/pages/home.css";
 ---
 
+<!-- Hidden SEO heading – invisible to sighted users, readable by crawlers -->
+<h1 class="seo-hidden-h1">Neeraj Mukta – Full-Stack Engineer, Product Builder, and Digital Curator</h1>
+
 <main class="layout" id="main-content">
     <section class="hero" id="about">
         <p class="label">Available For Q4 2026</p>
-        <h1
+        <h2
             class="headline"
             id="typewriter"
             aria-live="polite"
@@ -14,7 +17,24 @@ import "../../styles/pages/home.css";
             data-accent-start="14"
             data-accent-end="31"
         >
-        </h1>
+        </h2>
+
+        <!-- Introduction section with its own typewriter -->
+        <div class="intro-section" id="intro">
+            <p
+                class="intro-text"
+                id="introTypewriter"
+                aria-live="polite"
+                data-intro="Hi, I'm Neeraj Mukta with an Engineering degree in IT. But my interests and expertise lie in many more things than just software engineering. This website is designed and developed by me with help of AI. Doing this in a non-AI world would have taken a couple of months but AI made the process faster. Contrary to what companies promise, this wasn't built in a day with a few prompts. This was an iterative process. If you'd like to read more about how I built this check out this blog. Also, I write about AI trends, Engineering, Tech, Life and much more. I can help you build your dream idea into an app. Scroll down to find out how."
+            ></p>
+        </div>
+
+        <!-- Scroll arrow -->
+        <div class="scroll-hint" aria-hidden="true">
+            <svg class="scroll-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 5v14M5 12l7 7 7-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </div>
     </section>
 
     <section class="bento" id="work">
@@ -97,11 +117,11 @@ import "../../styles/pages/home.css";
             <span class="subtitle-word">for...</span>
         </p>
         <div class="pathways-grid">
-            <a
+        <a
                 class="pathway-card card interactive"
                 data-stagger="5"
                 data-sound="deep"
-                href="/javascript-typescript-mastery"
+                href="/#services"
             >
                 <h3>JavaScript & TypeScript Mastery</h3>
                 <p>
@@ -118,7 +138,7 @@ import "../../styles/pages/home.css";
                 class="pathway-card card interactive"
                 data-stagger="6"
                 data-sound="ping"
-                href="/enterprise-webflow-development"
+                href="/#services"
             >
                 <h3>Enterprise Webflow Development</h3>
                 <p>
@@ -135,7 +155,7 @@ import "../../styles/pages/home.css";
                 class="pathway-card card interactive"
                 data-stagger="7"
                 data-sound="deep"
-                href="/native-cross-platform-apps"
+                href="/#services"
             >
                 <h3>Native & Cross-Platform Apps</h3>
                 <p>
@@ -152,7 +172,7 @@ import "../../styles/pages/home.css";
                 class="pathway-card card interactive"
                 data-stagger="8"
                 data-sound="ping"
-                href="/generative-ai-llm-solutions"
+                href="/#services"
             >
                 <h3>Generative AI & LLM Solutions</h3>
                 <p>

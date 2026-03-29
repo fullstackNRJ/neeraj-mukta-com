@@ -1,8 +1,10 @@
 ---
+export const prerender = true;
 import RecruiterContent from "../components/recruiter/RecruiterContent.astro";
 import RecruiterEnhancements from "../components/recruiter/RecruiterEnhancements.astro";
 import RecruiterNavbar from "../components/recruiter/RecruiterNavbar.astro";
 import BackgroundEffects from "../components/layout/BackgroundEffects.astro";
+import BottomNav from "../components/layout/BottomNav.astro";
 import Footer from "../components/layout/Footer.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
@@ -34,5 +36,7 @@ const seo = {
     <RecruiterNavbar />
     <RecruiterContent />
     <Footer />
+    <BottomNav />
     <RecruiterEnhancements />
 </BaseLayout>
+

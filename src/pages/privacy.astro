@@ -1,0 +1,244 @@
+---
+export const prerender = true;
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navbar from "../components/layout/Navbar.astro";
+import Footer from "../components/layout/Footer.astro";
+import BackgroundEffects from "../components/layout/BackgroundEffects.astro";
+import PageEnhancements from "../components/layout/PageEnhancements.astro";
+import BottomNav from "../components/layout/BottomNav.astro";
+
+const seo = {
+    title: "Privacy Policy | Neeraj Mukta",
+    description:
+        "Privacy policy for neeraj-mukta.com. Learn how we handle your data and protect your privacy.",
+    keywords: ["privacy policy", "data protection", "neeraj mukta"],
+};
+
+const lastUpdated = "March 2026";
+---
+
+<BaseLayout {...seo}>
+    <BackgroundEffects />
+    <Navbar />
+    <main class="layout privacy-page" id="main-content">
+        <article class="privacy-article">
+            <header class="privacy-header">
+                <p class="label">Legal</p>
+                <h1 class="headline">Privacy Policy</h1>
+                <p class="privacy-meta">Last updated: {lastUpdated}</p>
+            </header>
+
+            <section class="privacy-section">
+                <h2>1. Overview</h2>
+                <p>
+                    This website (<strong>neeraj-mukta.com</strong>) is a
+                    personal portfolio operated by Neeraj Mukta. Your privacy
+                    matters. This policy explains what information is collected,
+                    how it is used, and what rights you have.
+                </p>
+            </section>
+
+            <section class="privacy-section">
+                <h2>2. Information We Collect</h2>
+                <p>
+                    We collect minimal data and only what is necessary to provide
+                    the service:
+                </p>
+                <ul>
+                    <li>
+                        <strong>Usage data</strong> — pages visited, browser type,
+                        device type, and referrer via server logs. No personally
+                        identifiable information is tied to these logs.
+                    </li>
+                    <li>
+                        <strong>Session storage</strong> — a temporary flag
+                        (<code>gate-passed</code>, <code>home-animated</code>) is
+                        written to your browser's <code>sessionStorage</code> to
+                        remember your animation preference within the current
+                        browser tab. This is cleared automatically when the tab
+                        is closed.
+                    </li>
+                    <li>
+                        <strong>Local storage</strong> — your light/dark theme
+                        preference is saved in <code>localStorage</code> on your
+                        device so it persists between visits. It never leaves your
+                        browser.
+                    </li>
+                    <li>
+                        <strong>Contact emails</strong> — if you email
+                        admin@neerajmukta.com, your message is kept only as long
+                        as needed to respond and is never shared with third
+                        parties.
+                    </li>
+                </ul>
+            </section>
+
+            <section class="privacy-section">
+                <h2>3. Cookies &amp; Tracking</h2>
+                <p>
+                    This website does <strong>not</strong> use tracking cookies,
+                    advertising cookies, or any third-party analytics SDKs (e.g.
+                    Google Analytics, Meta Pixel). No data is sent to ad networks.
+                </p>
+                <p>
+                    Google Fonts are loaded from
+                    <code>fonts.googleapis.com</code>. Google may record the font
+                    request; consult
+                    <a
+                        href="https://policies.google.com/privacy"
+                        target="_blank"
+                        rel="noopener noreferrer">Google's Privacy Policy</a
+                    > for details.
+                </p>
+            </section>
+
+            <section class="privacy-section">
+                <h2>4. How We Use Your Information</h2>
+                <ul>
+                    <li>To serve and improve this website.</li>
+                    <li>To respond to contact requests.</li>
+                    <li>To diagnose and fix technical issues.</li>
+                </ul>
+                <p>We do not sell, rent, or share your data with third parties.</p>
+            </section>
+
+            <section class="privacy-section">
+                <h2>5. Data Retention</h2>
+                <p>
+                    Server logs are retained for up to 30 days for security and
+                    diagnostic purposes, then deleted. Email correspondence is
+                    retained only as long as necessary for the relevant
+                    conversation.
+                </p>
+            </section>
+
+            <section class="privacy-section">
+                <h2>6. Your Rights</h2>
+                <p>
+                    You have the right to request access to, correction of, or
+                    deletion of any personal data we hold about you. To exercise
+                    these rights, email
+                    <a href="mailto:admin@neerajmukta.com"
+                        >admin@neerajmukta.com</a
+                    >.
+                </p>
+                <p>
+                    If you are in the European Economic Area (EEA), you also have
+                    rights under the General Data Protection Regulation (GDPR),
+                    including the right to data portability and the right to lodge
+                    a complaint with a supervisory authority.
+                </p>
+            </section>
+
+            <section class="privacy-section">
+                <h2>7. Security</h2>
+                <p>
+                    This site is served over HTTPS. Security headers (including
+                    Content Security Policy, X-Frame-Options, and
+                    Referrer-Policy) are set on all responses. While we take
+                    reasonable precautions, no transmission over the internet is
+                    100% secure.
+                </p>
+            </section>
+
+            <section class="privacy-section">
+                <h2>8. Children's Privacy</h2>
+                <p>
+                    This website is not directed at children under 13. We do not
+                    knowingly collect information from children.
+                </p>
+            </section>
+
+            <section class="privacy-section">
+                <h2>9. Changes to This Policy</h2>
+                <p>
+                    This policy may be updated from time to time. The "Last
+                    updated" date at the top of this page will reflect any
+                    changes. Continued use of the site after changes constitutes
+                    acceptance of the revised policy.
+                </p>
+            </section>
+
+            <section class="privacy-section">
+                <h2>10. Contact</h2>
+                <p>
+                    Questions about this privacy policy? Reach out at
+                    <a href="mailto:admin@neerajmukta.com"
+                        >admin@neerajmukta.com</a
+                    >.
+                </p>
+            </section>
+        </article>
+    </main>
+    <Footer />
+    <BottomNav />
+    <PageEnhancements />
+</BaseLayout>
+
+<style>
+    .privacy-page {
+        max-width: 74ch;
+    }
+
+    .privacy-header {
+        margin-bottom: 2.5rem;
+    }
+
+    .privacy-meta {
+        margin: 0.5rem 0 0;
+        font-size: 0.82rem;
+        color: var(--on-surface-variant);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+    }
+
+    .privacy-article {
+        padding-bottom: 4rem;
+    }
+
+    .privacy-section {
+        margin-top: 2.2rem;
+    }
+
+    .privacy-section h2 {
+        margin: 0 0 0.8rem;
+        font-size: 1.15rem;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+        color: var(--on-surface);
+    }
+
+    .privacy-section p,
+    .privacy-section li {
+        color: var(--on-surface-variant);
+        line-height: 1.75;
+        font-size: 0.95rem;
+    }
+
+    .privacy-section ul {
+        padding-left: 1.4rem;
+        margin: 0.5rem 0;
+    }
+
+    .privacy-section li {
+        margin-top: 0.4rem;
+    }
+
+    .privacy-section a {
+        color: var(--primary);
+        text-decoration: none;
+    }
+
+    .privacy-section a:hover {
+        text-decoration: underline;
+    }
+
+    .privacy-section code {
+        font-family: 'SF Mono', 'Fira Code', ui-monospace, monospace;
+        font-size: 0.85em;
+        background: var(--surface-container-high);
+        padding: 0.1em 0.35em;
+        border-radius: 0.25rem;
+        color: var(--primary);
+    }
+</style>

@@ -59,6 +59,8 @@
                     const start = performance.now();
                     const duration = 1400;
 
+                    node.setAttribute("aria-hidden", "true");
+
                     function step() {
                         const progress = Math.min(
                             (performance.now() - start) / duration,
@@ -70,6 +72,8 @@
 
                         if (progress < 1) {
                             requestAnimationFrame(step);
+                        } else {
+                            node.removeAttribute("aria-hidden");
                         }
                     }
 

@@ -1,7 +1,9 @@
 ---
+export const prerender = true;
 import MarketingContent from "../components/marketing/MarketingContent.astro";
 import MarketingEnhancements from "../components/marketing/MarketingEnhancements.astro";
 import MarketingNavbar from "../components/marketing/MarketingNavbar.astro";
+import BottomNav from "../components/layout/BottomNav.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 const seo = {
@@ -40,5 +42,7 @@ const seo = {
     </Fragment>
     <MarketingNavbar />
     <MarketingContent />
+    <BottomNav />
     <MarketingEnhancements />
 </BaseLayout>
+

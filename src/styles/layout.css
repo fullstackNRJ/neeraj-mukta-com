@@ -66,11 +66,128 @@
     height: 2.1rem;
     border-radius: 999px;
     cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .icon-btn svg {
     width: 1rem;
     height: 1rem;
+}
+
+/* ── Theme icon btn – swap sun/moon based on active theme ─────────────── */
+
+.theme-icon-btn .icon-moon {
+    display: none;
+}
+
+body[data-theme='light'] .theme-icon-btn .icon-sun {
+    display: none;
+}
+
+body[data-theme='light'] .theme-icon-btn .icon-moon {
+    display: block;
+}
+
+/* ── IA Popover ────────────────────────────────────────────────────────── */
+
+.ia-popover-wrap {
+    position: relative;
+}
+
+.ia-panel {
+    position: absolute;
+    top: calc(100% + 0.6rem);
+    right: 0;
+    width: 18rem;
+    border-radius: var(--radius-lg);
+    background: color-mix(in srgb, var(--surface-container-highest) 94%, transparent);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow:
+        0 16px 40px rgba(0, 0, 0, 0.35),
+        inset 0 0 0 1px var(--outline-ghost);
+    padding: 1rem 1.1rem 1.2rem;
+    z-index: 20;
+}
+
+.ia-panel[hidden] {
+    display: none;
+}
+
+.ia-heading {
+    margin: 0.8rem 0 0.4rem;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--on-surface-variant);
+    font-weight: 700;
+}
+
+.ia-heading:first-child {
+    margin-top: 0;
+}
+
+.ia-pages {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.22rem;
+}
+
+.ia-pages a {
+    color: var(--on-surface);
+    text-decoration: none;
+    font-size: 0.82rem;
+    transition: color 180ms ease;
+}
+
+.ia-pages a:hover {
+    color: var(--primary);
+}
+
+.ia-tokens {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.token-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+}
+
+.token-swatch {
+    width: 0.85rem;
+    height: 0.85rem;
+    border-radius: 0.2rem;
+    border: 1px solid var(--outline-ghost);
+    flex-shrink: 0;
+}
+
+.token-label {
+    color: var(--on-surface-variant);
+    flex: 1;
+}
+
+.token-value {
+    font-family: 'SF Mono', 'Fira Code', ui-monospace, monospace;
+    font-size: 0.7rem;
+    color: var(--primary);
+    background: var(--surface-container);
+    padding: 0.05em 0.35em;
+    border-radius: 0.2rem;
+}
+
+.ia-font {
+    margin: 0;
+    font-size: 0.8rem;
+    color: var(--on-surface-variant);
 }
 
 .avatar-btn {
@@ -185,6 +302,23 @@ body[data-theme='light'] .toggle-thumb {
 
     .layout {
         padding-top: 6rem;
+    }
+}
+
+/* ── Tablet (600 – 950 px) ──────────────────────────────────────────── */
+
+@media (min-width: 600px) and (max-width: 950px) {
+    .floating-nav {
+        padding: 0.7rem 0.9rem;
+    }
+}
+
+/* ── 13" MacBook (1280 – 1440 px) ──────────────────────────────────── */
+
+@media (min-width: 951px) and (max-width: 1300px) {
+    .layout {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
     }
 }
 

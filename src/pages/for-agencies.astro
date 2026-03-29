@@ -1,12 +1,14 @@
 ---
+export const prerender = true;
 import AgencyContent from "../components/agency/AgencyContent.astro";
 import AgencyEnhancements from "../components/agency/AgencyEnhancements.astro";
 import AgencyFooter from "../components/agency/AgencyFooter.astro";
 import AgencyNavbar from "../components/agency/AgencyNavbar.astro";
+import BottomNav from "../components/layout/BottomNav.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 const seo = {
-    title: "Agency Partner | The Technical Atelier | Neeraj Mukta",
+    title: "Agency Partner | Neeraj Mukta",
     description:
         "High-fidelity technical execution for creative agencies. White-label engineering, complex Webflow builds, and scalable product architecture.",
     keywords: [
@@ -43,5 +45,7 @@ const seo = {
     <AgencyNavbar />
     <AgencyContent />
     <AgencyFooter />
+    <BottomNav />
     <AgencyEnhancements />
 </BaseLayout>
+

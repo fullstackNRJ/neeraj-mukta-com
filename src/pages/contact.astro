@@ -1,9 +1,11 @@
 ---
+export const prerender = true;
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Navbar from "../components/layout/Navbar.astro";
 import Footer from "../components/layout/Footer.astro";
 import BackgroundEffects from "../components/layout/BackgroundEffects.astro";
 import PageEnhancements from "../components/layout/PageEnhancements.astro";
+import BottomNav from "../components/layout/BottomNav.astro";
 
 const seo = {
     title: "Contact | Neeraj Mukta",
@@ -26,14 +28,15 @@ const seo = {
             </p>
             <a
                 class="btn btn-primary interactive"
-                href="mailto:hello@neeraj-mukta.com"
+                href="mailto:admin@neerajmukta.com"
                 data-sound="bright"
             >
-                hello@neeraj-mukta.com
+                admin@neerajmukta.com
             </a>
         </section>
     </main>
     <Footer />
+    <BottomNav />
     <PageEnhancements />
 </BaseLayout>
 
